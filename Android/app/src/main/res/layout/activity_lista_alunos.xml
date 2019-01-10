@@ -10,14 +10,21 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:id="@+id/lista_alunos"></ListView>
-   
+
    <Button
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:text="Novo aluno"
-       android:layout_below="@+id/lista_alunos"
+       android:id="@+id/novo_aluno"
+       android:layout_width="56dp"
+       android:layout_height="56dp"
+       android:text="+"
+       android:textColor="#fff"
+       android:textSize="40sp"
+       android:elevation="6dp"
+       android:layout_alignParentBottom="true"
        android:layout_alignParentRight="true"
-       />
+       android:layout_marginBottom="16dp"
+       android:layout_marginRight="16dp"
+       android:background="@drawable/fundo"
+       android:stateListAnimator="@null"/>
    
 
 </RelativeLayout>
