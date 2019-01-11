@@ -6,9 +6,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class AlunoDAO extends SQLiteOpenHelper {
 
+    private static AlunoDAO uniqueInstance;
 
-    public AlunoDAO(Context context) {
+    private AlunoDAO(Context context) {
         super(context, "Agenda", null, 1);
+    }
+
+    public static AlunoDAO getInstance(Context context) {
+        if(uniqueInstance == null) {
+            uniqueInstance = new AlunoDAO(context);
+        }
+        return uniqueInstance;
     }
 
     @Override
@@ -19,6 +27,8 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        String sql = "DROP TABLE IF EXISTS Alunos";
+        db.execSQL(sql);
+        onCreate(db);
     }
 }

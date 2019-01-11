@@ -37,10 +37,10 @@ public class FormularioActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_ok:
                 Aluno aluno = helper.getAluno();
+
+
+
                 Toast.makeText(FormularioActivity.this,"Aluno: " + aluno.getNome() + " Salvo!", Toast.LENGTH_LONG).show();
-
-
-
                 finish();
                 break;
         }
