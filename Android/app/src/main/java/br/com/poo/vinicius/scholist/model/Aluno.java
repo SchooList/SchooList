@@ -2,20 +2,18 @@ package br.com.poo.vinicius.scholist.model;
 
 public class Aluno {
 
-    private static Long id;
+    private Long id;
     private String nome;
     private String endereco;
     private String telefone;
     private String site;
     private Double nota;
-
-
-    public static Long getId() {
+    public Long getId() {
         return id;
     }
 
-    public static void setId(Long id) {
-        Aluno.id = id;
+    public  void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -59,4 +57,8 @@ public class Aluno {
     }
 
 
+    @Override
+    public String toString() {
+        return getId() + " - " + getNome();
+    }
 }
