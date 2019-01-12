@@ -3,6 +3,7 @@ package br.com.poo.vinicius.scholist;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,26 +16,33 @@ import br.com.poo.vinicius.scholist.model.Aluno;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
+    ListView listaAlunos;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
+        listaAlunos = (ListView) findViewById(R.id.lista_alunos);
+
+        registerForContextMenu(listaAlunos);
+
         Button novoAluno = findViewById(R.id.novo_aluno);
         novoAluno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentToForm = new Intent(ListaAlunosActivity.this,FormularioActivity.class);
                 startActivity(intentToForm);
+
+
+
             }
         });
     }
-
     private void carregaLista() {
         AlunoDAO dao = AlunoDAO.getInstance(this);
         List<Aluno> alunos = dao.buscaAlunos();
         dao.close();
-
-        ListView listaAlunos = (ListView) findViewById(R.id.lista_alunos);
         ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos);
         listaAlunos.setAdapter(adapter);
     }
@@ -43,7 +51,12 @@ public class ListaAlunosActivity extends AppCompatActivity {
     protected void onResume() {
         carregaLista();
         super.onResume();
+        }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        menu.add("Remover");
 
+        super.onCreateContextMenu(menu, v, menuInfo);
     }
 }
