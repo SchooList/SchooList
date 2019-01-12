@@ -18,15 +18,28 @@ import br.com.poo.vinicius.scholist.dao.AlunoDAO;
 import br.com.poo.vinicius.scholist.model.Aluno;
 
 public class ListaAlunosActivity extends AppCompatActivity {
-
     ListView listaAlunos;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
         listaAlunos = (ListView) findViewById(R.id.lista_alunos);
+
+        listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
+                Aluno aluno = (Aluno) lista.getItemAtPosition(position);
+            }
+        });
+
+        listaAlunos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                return false;
+            }
+        });
+
 
         registerForContextMenu(listaAlunos);
 
@@ -36,9 +49,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentToForm = new Intent(ListaAlunosActivity.this,FormularioActivity.class);
                 startActivity(intentToForm);
-
-
-
             }
         });
     }
@@ -74,7 +84,5 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-
     }
 }
