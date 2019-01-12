@@ -19,16 +19,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
-
-
-        AlunoDAO dao = AlunoDAO.getInstance(this);
-        List<Aluno> alunos = dao.buscaAlunos();
-        dao.close();
-
-        ListView listaAlunos = (ListView) findViewById(R.id.lista_alunos);
-        ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos);
-        listaAlunos.setAdapter(adapter);
-
         Button novoAluno = findViewById(R.id.novo_aluno);
         novoAluno.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +27,22 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 startActivity(intentToForm);
             }
         });
+    }
 
+    private void carregaLista() {
+        AlunoDAO dao = AlunoDAO.getInstance(this);
+        List<Aluno> alunos = dao.buscaAlunos();
+        dao.close();
+
+        ListView listaAlunos = (ListView) findViewById(R.id.lista_alunos);
+        ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos);
+        listaAlunos.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onResume() {
+        carregaLista();
+        super.onResume();
 
 
     }
