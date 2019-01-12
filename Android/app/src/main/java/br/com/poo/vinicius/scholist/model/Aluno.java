@@ -1,6 +1,8 @@
 package br.com.poo.vinicius.scholist.model;
 
-public class Aluno {
+import java.io.Serializable;
+
+public class Aluno implements Serializable {
 
     private Long id;
     private String nome;

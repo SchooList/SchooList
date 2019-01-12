@@ -1,5 +1,6 @@
 package br.com.poo.vinicius.scholist;
 
+import android.content.Intent;
 import android.media.Rating;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,13 @@ public class FormularioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
         helper = new FormularioHelper(this);
+
+        Intent intent = getIntent();
+        Aluno aluno = (Aluno) intent.getSerializableExtra("aluno");
+        helper = new FormularioHelper(this);
+        if(aluno != null) {
+            helper.preencheFormulario(aluno);
+        }
     }
 
     @Override
@@ -48,11 +56,4 @@ public class FormularioActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
-
-
-
 }
