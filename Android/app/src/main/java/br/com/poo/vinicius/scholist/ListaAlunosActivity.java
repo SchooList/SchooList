@@ -68,25 +68,26 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        carregaLista();
         super.onResume();
+        carregaLista();
         }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
 
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+        final Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(info.position);
+
+        Uri uri = Uri.parse("http://"+aluno.getSite());
         MenuItem itemSite = menu.add("Visitar Site");
-        Intent intentSite = new Intent(Intent.ACTION_VIEW);
-        intentSite.setData(Uri.parse("http://www.google.com"));
+        Intent intentSite = new Intent(Intent.ACTION_VIEW, uri);
+
         startActivity(intentSite);
 
         MenuItem delete = menu.add("Deletar");
         delete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-                Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(info.position);
                 Toast.makeText(ListaAlunosActivity.this, "Aluno: " + aluno.getNome() + " Deletado", Toast.LENGTH_SHORT).show();
                 AlunoDAO dao = AlunoDAO.getInstance(ListaAlunosActivity.this);
                 dao.delete(aluno);
