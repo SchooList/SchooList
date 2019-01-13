@@ -74,15 +74,21 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
-
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         final Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(info.position);
 
-        Uri uri = Uri.parse("http://"+aluno.getSite());
         MenuItem itemSite = menu.add("Visitar Site");
-        Intent intentSite = new Intent(Intent.ACTION_VIEW, uri);
+        Intent intentSite = new Intent(Intent.ACTION_VIEW);
+        String site = aluno.getSite();
+        if(!site.startsWith("http://")) {
+            site = "http://" + site;
+        }
+        intentSite.setData(Uri.parse(site));
 
-        startActivity(intentSite);
+
+        MenuItem itemTelefone = menu.add("Ligar para: " + aluno.getNome());
+
+
 
         MenuItem delete = menu.add("Deletar");
         delete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
