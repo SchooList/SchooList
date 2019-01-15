@@ -98,14 +98,20 @@ public class ListaAlunosActivity extends AppCompatActivity {
         itemMapa.setIntent(intentMapa);
 
 
-        MenuItem itemSite = menu.add("Visitar Site");
+        MenuItem itemSite = menu.add("Visitar site");
         Intent intentSite = new Intent(Intent.ACTION_VIEW);
+
         intentSite.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+
+
         String site = aluno.getSite();
-        if(!site.startsWith("http://")) {
-            site = "http://" + site;
+        if (!site.startsWith("https://")){
+            site = "https://" + site;
         }
+
         intentSite.setData(Uri.parse(site));
+        itemSite.setIntent(intentSite);
 
         MenuItem delete = menu.add("Deletar");
         delete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
