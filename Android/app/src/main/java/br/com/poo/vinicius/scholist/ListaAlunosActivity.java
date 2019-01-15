@@ -1,8 +1,13 @@
 package br.com.poo.vinicius.scholist;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.Browser;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -77,12 +82,26 @@ public class ListaAlunosActivity extends AppCompatActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         final Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(info.position);
 
-
         MenuItem itemLigar = menu.add("Ligar");
-        Intent intentLigar = new Intent(Intent.ACTION_CALL);
-        intentLigar.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intentLigar.setData(Uri.parse("tel:" + aluno.getTelefone()));
-        itemLigar.setIntent(intentLigar);
+
+        itemLigar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if(ActivityCompat.checkSelfPermission(ListaAlunosActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(ListaAlunosActivity.this, new String[] {Manifest.permission.CALL_PHONE}, 123);
+                } else {
+                    Intent intentLigar = new Intent(Intent.ACTION_CALL);
+                    intentLigar.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intentLigar.setData(Uri.parse("tel:" + aluno.getTelefone()));
+                    startActivity(intentLigar);
+                }
+
+
+
+                return false;
+            }
+        });
+
 
 
         MenuItem itemSMS = menu.add("Enviar SMS");
@@ -97,13 +116,9 @@ public class ListaAlunosActivity extends AppCompatActivity {
         intentMapa.setData(Uri.parse("geo:0,0?q=" + aluno.getEndereco()));
         itemMapa.setIntent(intentMapa);
 
-
         MenuItem itemSite = menu.add("Visitar site");
         Intent intentSite = new Intent(Intent.ACTION_VIEW);
-
         intentSite.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-
 
         String site = aluno.getSite();
         if (!site.startsWith("https://")){
