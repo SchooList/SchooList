@@ -95,9 +95,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
                     intentLigar.setData(Uri.parse("tel:" + aluno.getTelefone()));
                     startActivity(intentLigar);
                 }
-
-
-
                 return false;
             }
         });
@@ -116,17 +113,14 @@ public class ListaAlunosActivity extends AppCompatActivity {
         intentMapa.setData(Uri.parse("geo:0,0?q=" + aluno.getEndereco()));
         itemMapa.setIntent(intentMapa);
 
-        MenuItem itemSite = menu.add("Visitar site");
+        MenuItem ItemSite = menu.add("Visitar site");
         Intent intentSite = new Intent(Intent.ACTION_VIEW);
-        intentSite.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
         String site = aluno.getSite();
-        if (!site.startsWith("https://")){
-            site = "https://" + site;
+        if (!site.startsWith("http://")){
+            site = "http://" + site;
         }
-
         intentSite.setData(Uri.parse(site));
-        itemSite.setIntent(intentSite);
+        ItemSite.setIntent(intentSite);
 
         MenuItem delete = menu.add("Deletar");
         delete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
