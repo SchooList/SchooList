@@ -7,12 +7,13 @@
 
 
     <application
-        android:allowBackup="true"
+    android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="SchooList"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".ListaAlunosActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +24,18 @@
         <activity android:name=".FormularioActivity">
 
         </activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+
+
     </application>
 
 </manifest>
