@@ -29,7 +29,7 @@ public class FormularioActivity extends AppCompatActivity {
 
 
     public static final int CODIGO_CAMERA = 567;
-    FormularioHelper helper;
+    private FormularioHelper helper;
     private String caminhoFoto;
 
     @Override
@@ -37,10 +37,9 @@ public class FormularioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
         helper = new FormularioHelper(this);
-        final Intent intent = getIntent();
+        Intent intent = getIntent();
         Aluno aluno = (Aluno) intent.getSerializableExtra("aluno");
-        helper = new FormularioHelper(this);
-        if(aluno != null) {
+        if (aluno != null) {
             helper.preencheFormulario(aluno);
         }
 
@@ -65,18 +64,9 @@ public class FormularioActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == Activity
-                .RESULT_OK) {
-            switch (requestCode) {
-                case CODIGO_CAMERA:
-                    ImageView foto = (ImageView) findViewById(R.id.formulario_foto);
-                    Bitmap bitmap = BitmapFactory.decodeFile(caminhoFoto);
-                    Bitmap bitmapReduce = Bitmap.createScaledBitmap(bitmap, 300, 300, true);
-                    foto.setImageBitmap(bitmapReduce);
-                    foto.setScaleType(ImageView.ScaleType.FIT_XY);
-                    break;
-                default:
-                    break;
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == CODIGO_CAMERA) {
+                helper.carregaImagem(caminhoFoto);
             }
         }
     }
