@@ -15,8 +15,7 @@
 
     </item>
 
-    <item android:drawable="@drawable/cam">
-
+    <item android:drawable="@drawable/ic_camera">
 
 
     </item>
