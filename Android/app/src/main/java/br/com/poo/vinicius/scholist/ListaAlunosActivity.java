@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import br.com.poo.vinicius.scholist.adapter.AlunosAdapter;
 import br.com.poo.vinicius.scholist.dao.AlunoDAO;
 import br.com.poo.vinicius.scholist.model.Aluno;
 
@@ -67,7 +68,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
         AlunoDAO dao = AlunoDAO.getInstance(this);
         List<Aluno> alunos = dao.buscaAlunos();
         dao.close();
-        ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos);
+        AlunosAdapter adapter = new AlunosAdapter(this,alunos);
         listaAlunos.setAdapter(adapter);
     }
 
