@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.net.HttpURLConnection;
 import java.util.List;
 
 import br.com.poo.vinicius.scholist.adapter.AlunosAdapter;
@@ -98,7 +99,9 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 String json = converter.converteToJSON(alunos);
 
 
-                Toast.makeText(this, json, Toast.LENGTH_SHORT);
+
+
+                Toast.makeText(this, json, Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(item);
