@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="br.com.poo.vinicius.scholist">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/menuEnviarNotas"
+        android:icon="@drawable/ic_enviar"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="Enviar notas"
         app:showAsAction="never" />
 </menu>
