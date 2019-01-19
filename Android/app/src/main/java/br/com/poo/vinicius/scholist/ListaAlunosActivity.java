@@ -92,18 +92,8 @@ public class ListaAlunosActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())  {
             case R.id.menuEnviarNotas:
-                AlunoDAO dao = AlunoDAO.getInstance(this);
-                List<Aluno> alunos = dao.buscaAlunos();
-                dao.close();
-                AlunoConverter converter = new AlunoConverter();
-                String json = converter.converteToJSON(alunos);
-                WebClient client = WebClient.getInstance();
-                String resposta = client.post(json);
+                new EnviaAlunosTask(this).execute();
 
-
-
-
-                Toast.makeText(this, resposta, Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -130,9 +120,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-
-
         MenuItem itemSMS = menu.add("Enviar SMS");
         Intent intentSMS = new Intent(Intent.ACTION_VIEW);
         intentSMS.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
