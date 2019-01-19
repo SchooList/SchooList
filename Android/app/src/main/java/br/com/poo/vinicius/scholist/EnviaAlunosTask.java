@@ -10,7 +10,7 @@ import br.com.poo.vinicius.scholist.converter.AlunoConverter;
 import br.com.poo.vinicius.scholist.dao.AlunoDAO;
 import br.com.poo.vinicius.scholist.model.Aluno;
 
-public class EnviaAlunosTask extends AsyncTask<Object, Object, String> {
+public class EnviaAlunosTask extends AsyncTask<Void, Void, String> {
     private ProgressDialog dialog;
 
     public EnviaAlunosTask(Context context) {
@@ -19,7 +19,6 @@ public class EnviaAlunosTask extends AsyncTask<Object, Object, String> {
 
     private Context context;
 
-
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -27,7 +26,7 @@ public class EnviaAlunosTask extends AsyncTask<Object, Object, String> {
     }
 
     @Override
-    protected String doInBackground(Object... objects) {
+    protected String doInBackground(Void... objects) {
         AlunoDAO dao = AlunoDAO.getInstance(context);
         List<Aluno> alunos = dao.buscaAlunos();
         dao.close();
