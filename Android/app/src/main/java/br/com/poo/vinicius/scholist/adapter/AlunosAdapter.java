@@ -51,6 +51,16 @@ public class AlunosAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.list_item, parent, false);
         }
 
+        TextView campoEndereco = (TextView) view.findViewById(R.id.item_endereco);
+        TextView campoSite = (TextView) view.findViewById(R.id.item_site);
+
+
+        if(campoEndereco != null && campoSite != null) {
+            campoEndereco.setText(aluno.getEndereco());
+            campoSite.setText(aluno.getSite());
+        }
+
+
         TextView campoNome = (TextView) view.findViewById(R.id.item_nome);
         campoNome.setText(aluno.getNome());
 
