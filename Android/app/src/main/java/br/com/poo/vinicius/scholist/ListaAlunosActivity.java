@@ -93,7 +93,10 @@ public class ListaAlunosActivity extends AppCompatActivity {
         switch (item.getItemId())  {
             case R.id.menuEnviarNotas:
                 new EnviaAlunosTask(this).execute();
-
+                break;
+            case R.id.menu_baixar_provas:
+                Intent intentGoToProof = new Intent(ListaAlunosActivity.this, ProvasActivity.class);
+                startActivity(intentGoToProof);
                 break;
         }
         return super.onOptionsItemSelected(item);
