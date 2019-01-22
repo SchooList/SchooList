@@ -1,5 +1,6 @@
 package br.com.poo.vinicius.scholist;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,7 +39,9 @@ public class ProvasActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Prova prova = (Prova) parent.getItemAtPosition(position);
-                Toast.makeText(ProvasActivity.this, " " + prova, Toast.LENGTH_SHORT).show();
+                Intent goToDetails = new Intent(ProvasActivity.this, DetalhesProvaActivity.class);
+                //goToDetails.putExtra("prova", prova);
+                startActivity(goToDetails);
             }
         });
     }
