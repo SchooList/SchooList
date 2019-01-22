@@ -1,8 +1,11 @@
 package br.com.poo.vinicius.scholist.model;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class Prova {
+public class Prova implements Serializable {
     private String materia;
     private String data;
     private List<String> topicos;

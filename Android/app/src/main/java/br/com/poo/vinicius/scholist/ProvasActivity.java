@@ -40,7 +40,7 @@ public class ProvasActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Prova prova = (Prova) parent.getItemAtPosition(position);
                 Intent goToDetails = new Intent(ProvasActivity.this, DetalhesProvaActivity.class);
-                //goToDetails.putExtra("prova", prova);
+                goToDetails.putExtra("prova", prova);
                 startActivity(goToDetails);
             }
         });
