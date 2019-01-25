@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.Arrays;
+import java.util.List;
+
 import br.com.poo.vinicius.scholist.model.Prova;
 
 public class DetalhesProvaActivity extends AppCompatActivity {
@@ -17,6 +20,11 @@ public class DetalhesProvaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_prova);
+
+        List<String> topicosPort = Arrays.asList("Sujeito", "Predicado", "Objeto");
+        Prova provaPortugues = new Prova("Português", "25/05/2018", topicosPort);
+
+
         Intent intentDetails = getIntent();
         Prova prova = (Prova) intentDetails.getSerializableExtra("prova");
 

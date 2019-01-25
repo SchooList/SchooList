@@ -1,6 +1,8 @@
 package br.com.poo.vinicius.scholist;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,28 +23,11 @@ public class ProvasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provas);
-        List<String> topicosPort = Arrays.asList("Sujeito", "Predicado", "Objeto");
-        Prova provaPortugues = new Prova("Português", "25/05/2018", topicosPort);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction tx = fragmentManager.beginTransaction();
+        tx.replace(R.id.frame_principal, new ListaProvasFragment());
+        tx.commit();
 
-        List<String> topicosMat = Arrays.asList("Função", "Probabilidade");
-        Prova provaMatematica = new Prova("Matemática", "26/05/2018", topicosMat);
 
-
-        List<Prova> provas = Arrays.asList(provaMatematica, provaPortugues);
-
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1, provas);
-
-        ListView listaProvas  = (ListView) findViewById(R.id.provas_lista);
-        listaProvas.setAdapter(adapter);
-
-        listaProvas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Prova prova = (Prova) parent.getItemAtPosition(position);
-                Intent goToDetails = new Intent(ProvasActivity.this, DetalhesProvaActivity.class);
-                goToDetails.putExtra("prova", prova);
-                startActivity(goToDetails);
-            }
-        });
     }
 }
