@@ -27,7 +27,6 @@ import br.com.poo.vinicius.scholist.model.Aluno;
 
 public class FormularioActivity extends AppCompatActivity {
 
-
     public static final int CODIGO_CAMERA = 567;
     private FormularioHelper helper;
     private String caminhoFoto;
@@ -54,9 +53,6 @@ public class FormularioActivity extends AppCompatActivity {
                 Uri fotoUri = FileProvider.getUriForFile(FormularioActivity.this, BuildConfig.APPLICATION_ID + ".provider", arquivoFoto);
                 intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, fotoUri);
                 startActivityForResult(intentCamera, CODIGO_CAMERA);
-
-
-
             }
         });
     }
@@ -75,7 +71,6 @@ public class FormularioActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_formulario, menu);
-
         return super.onCreateOptionsMenu(menu);
     }
     @Override
@@ -84,16 +79,14 @@ public class FormularioActivity extends AppCompatActivity {
             case R.id.menu_ok:
                 Aluno aluno = helper.getAluno();
                 AlunoDAO dao = AlunoDAO.getInstance(this);
+
                 if(aluno.getId() != null) {
                     dao.update(aluno);
-                    Toast.makeText(FormularioActivity.this,"Aluno: " + aluno.getNome() + " Editado!", Toast.LENGTH_LONG).show();
                 } else {
                     dao.insere(aluno);
-                    Toast.makeText(FormularioActivity.this,"Aluno: " + aluno.getNome() + " Salvo!", Toast.LENGTH_LONG).show();
                 }
                 dao.close();
-
-
+                Toast.makeText(FormularioActivity.this, "Aluno "+aluno.getNome()+" salvo!", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }
