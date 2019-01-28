@@ -4,14 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/activity_provas"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"/>
+   <FrameLayout
+       android:id="@+id/frame_principal"
+       android:layout_width="0dp"
+       android:layout_height="match_parent"
+       android:layout_weight="1"></FrameLayout>
 
-    <include layout="@layout/activity_detalhes_prova"
+    <FrameLayout
+        android:id="@+id/frame_secundario"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"/>
+        android:layout_weight="2"></FrameLayout>
 
 </LinearLayout>
