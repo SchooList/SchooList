@@ -56,20 +56,6 @@
         app:layout_constraintTop_toBottomOf="@+id/edit_email" />
 
     <Button
-        android:id="@+id/btn_enter"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Cadastrar"
-        android:background="@drawable/bg_buttom_rounded"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/edit_password"
-        app:layout_constraintStart_toStartOf="@+id/edit_password"
-        app:layout_constraintTop_toBottomOf="@+id/edit_password" />
-
-    <Button
         android:id="@+id/btn_selected_photo"
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -82,7 +68,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="47dp"
 
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="12dp"
+        android:checked="false"
+        android:showText="true"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/edit_password" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="99dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="12dp"
+        android:text="PROFESSOR: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_password" />
 
 
 </android.support.constraint.ConstraintLayout>
