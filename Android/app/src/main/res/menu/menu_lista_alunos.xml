@@ -14,6 +14,12 @@
         android:icon="@drawable/ic_receber"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/menu_mapa"
+        android:title="Visualizar mapa"
+        android:icon="@drawable/ic_mapa"
+        app:showAsAction="always"
+        ></item>
 
 
 </menu>
