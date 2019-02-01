@@ -102,6 +102,10 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 Intent vaiParaMapa = new Intent(ListaAlunosActivity.this, MapsActivity.class);
                 startActivity(vaiParaMapa);
                 break;
+            case R.id.menuVerPerfil:
+                Intent goToProfile = new Intent(ListaAlunosActivity.this, ProfileActivity.class);
+                startActivity(goToProfile);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
