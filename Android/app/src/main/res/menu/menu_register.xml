@@ -5,12 +5,6 @@
 
 
 
-    <item
-        android:id="@+id/menu_right"
-        android:title="Save User"
-        android:icon="@drawable/ic_confirmar"
-        app:showAsAction="always"
-        ></item>
 
 
 </menu>
