@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "594168677374",
+    "firebase_url": "https://schoolist-6b891.firebaseio.com",
+    "project_id": "schoolist-6b891",
+    "storage_bucket": "schoolist-6b891.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594168677374:android:1a364492a9762ad1",
+        "android_client_info": {
+          "package_name": "br.com.poo.vinicius.scholist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "594168677374-cmvo02gramtn4euhe4q7fu56vgj2rq7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfRiKta0ANWhiU4ft6Mc1o6duYp3fE6Co"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
