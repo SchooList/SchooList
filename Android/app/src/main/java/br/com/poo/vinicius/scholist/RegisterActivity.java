@@ -41,69 +41,69 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText mEditUsername;
     private EditText mEditEmail;
     private EditText mEditPassword;
-    private Button btnEnter;
-    private EditText mUsername;
-    private Button mBtnImage;
-    private Uri mSelecetedUri;
+    private Button mBtnEnter;
+    private Button mBtnSelectedPhoto;
     private ImageView mImgPhoto;
+
+    private Uri mSelectedUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        mEditUsername = findViewById(R.id.edit_username);
         mEditEmail = findViewById(R.id.edit_email);
         mEditPassword = findViewById(R.id.edit_password);
-        btnEnter = (Button) findViewById(R.id.btn_enter);
-        mUsername = findViewById(R.id.edit_username);
-        mBtnImage = findViewById(R.id.btn_selected_photo);
+        mBtnEnter = findViewById(R.id.btn_enter);
+        mBtnSelectedPhoto = findViewById(R.id.btn_selected_photo);
         mImgPhoto = findViewById(R.id.img_photo);
-        mEditUsername = findViewById(R.id.edit_username);
 
-       btnEnter.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               createUser();
-           }
-       });
-
-        mBtnImage.setOnClickListener(new View.OnClickListener() {
+        mBtnSelectedPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectPhoto();
             }
         });
+
+        mBtnEnter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createUser();
+            }
+        });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 0) {
-            mSelecetedUri = data.getData();
+        if (requestCode == 0) {
+            mSelectedUri = data.getData();
 
             Bitmap bitmap = null;
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mSelecetedUri);
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mSelectedUri);
                 mImgPhoto.setImageDrawable(new BitmapDrawable(bitmap));
-                mBtnImage.setAlpha(0);
-            } catch(IOException e) {
-
+                mBtnSelectedPhoto.setAlpha(0);
+            } catch (IOException e) {
             }
-
         }
-
     }
-    public void selectPhoto() {
+
+    private void selectPhoto() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, 0);
     }
-    public void createUser() {
+
+    private void createUser() {
+        String nome = mEditUsername.getText().toString();
         String email = mEditEmail.getText().toString();
         String senha = mEditPassword.getText().toString();
-        String nome = mEditUsername.getText().toString();
-        if(nome == null || nome.isEmpty() || email == null || email.isEmpty() || senha.isEmpty() || senha == null) {
-            Toast.makeText(this, "Nome, Senha e E-mail devem ser preenchidas",Toast.LENGTH_SHORT).show();
+
+        if (nome == null || nome.isEmpty() || email == null || email.isEmpty() || senha == null || senha.isEmpty()) {
+            Toast.makeText(this, "Nome, senha e email devem ser preenchidos", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -111,63 +111,70 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
-                            Log.i("Sucesso", task.getResult().getUser().getUid());
+                        if (task.isSuccessful()) {
+                            Log.i("Teste", task.getResult().getUser().getUid());
+
                             saveUserInFirebase();
                         }
+
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.i("Error",e.getMessage().toString());
-            }
-        });
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i("Teste", e.getMessage());
+                    }
+                });
     }
 
     private void saveUserInFirebase() {
-        String fileName = UUID.randomUUID().toString();
-        final StorageReference ref  = FirebaseStorage.getInstance().getReference("/images/" + fileName);
-        ref.putFile(mSelecetedUri).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.i("Teste",e.getMessage());
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        String filename = UUID.randomUUID().toString();
+        final StorageReference ref = FirebaseStorage.getInstance().getReference("/images/" + filename);
+        ref.putFile(mSelectedUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
-                    public void onSuccess(Uri uri) {
-                        Log.i("teste",uri.toString());
-                        String uid = FirebaseAuth.getInstance().getUid();
-                        String nome = mEditUsername.getText().toString();
-                        String profileUri = uri.toString();
-                        User user = new User(uid,nome, profileUri);
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Log.i("Teste", uri.toString());
 
-                        FirebaseFirestore.getInstance().collection("/users")
-                                .document(uid)
-                                .set(user)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Toast.makeText(RegisterActivity.this, "RÉ", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(RegisterActivity.this, ListaAlunosActivity.class);
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(intent);
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.i("teste", e.getMessage());
-                                    }
-                                });
+                                String uid = FirebaseAuth.getInstance().getUid();
+                                String username = mEditUsername.getText().toString();
+                                String profileUrl = uri.toString();
 
+                                User user = new User(uid, username, profileUrl);
+
+                                FirebaseFirestore.getInstance().collection("users")
+                                        .document(uid)
+                                        .set(user)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Intent intent = new Intent(RegisterActivity.this, ListaAlunosActivity.class);
+
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                                                startActivity(intent);
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.i("Teste", e.getMessage());
+                                            }
+                                        });
+                            }
+                        });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Teste", e.getMessage(), e);
                     }
                 });
-            }
-        });
-    }
 
+    }
 
 }
