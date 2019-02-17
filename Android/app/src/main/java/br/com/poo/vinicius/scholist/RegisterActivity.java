@@ -147,7 +147,13 @@ public class RegisterActivity extends AppCompatActivity {
                                 String username = mEditUsername.getText().toString();
                                 String profileUrl = uri.toString();
 
-                                User user = new User(uid, username, profileUrl);
+                                String tipo = "aluno";
+                                if(professorUser.isChecked()) {
+                                    tipo = "professor";
+                                }
+
+
+                                User user = new User(uid, username, profileUrl, tipo);
 
                                 FirebaseFirestore.getInstance().collection("users")
                                         .document(uid)

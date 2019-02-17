@@ -7,7 +7,7 @@
     tools:context=".ProfileActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_photo2"
+        android:id="@+id/img_photoProfile"
         android:layout_width="150dp"
         android:layout_height="150dp"
         app:civ_border_width="2dp"
@@ -28,13 +28,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recicler"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Name: "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_selected_photo2" />
+
 </android.support.constraint.ConstraintLayout>

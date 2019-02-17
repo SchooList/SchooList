@@ -9,16 +9,17 @@ public class User implements Parcelable {
     private String uuid;
     private String username;
     private String profileUrl;
-
+    private String tipo;
     public User() {
 
     }
 
 
-    public User(String uuid, String username, String profileUrl) {
+    public User(String uuid, String username, String profileUrl, String tipo) {
         this.uuid = uuid;
         this.username = username;
         this.profileUrl = profileUrl;
+        this.tipo = tipo;
     }
 
 
