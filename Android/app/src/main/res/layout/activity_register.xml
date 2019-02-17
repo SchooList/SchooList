@@ -86,16 +86,17 @@
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Cadastrar"
+        android:layout_marginTop="52dp"
         android:background="@drawable/bg_buttom_rounded"
+        android:text="Cadastrar"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/edit_password"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/edit_password"
         app:layout_constraintTop_toBottomOf="@+id/edit_password" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/switchChoice"
         android:layout_width="47dp"
         android:layout_height="18dp"
         android:layout_marginStart="8dp"

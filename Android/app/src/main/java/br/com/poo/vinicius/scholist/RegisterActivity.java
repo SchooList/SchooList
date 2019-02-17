@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button mBtnEnter;
     private Button mBtnSelectedPhoto;
     private ImageView mImgPhoto;
+    private Switch professorUser;
 
     private Uri mSelectedUri;
 
@@ -58,6 +60,8 @@ public class RegisterActivity extends AppCompatActivity {
         mBtnEnter = findViewById(R.id.btn_enter);
         mBtnSelectedPhoto = findViewById(R.id.btn_selected_photo);
         mImgPhoto = findViewById(R.id.img_photo);
+        professorUser = findViewById(R.id.switchChoice);
+
 
         mBtnSelectedPhoto.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -36,13 +36,12 @@ dependencies {
     implementation 'com.xwray:groupie:2.1.0'
 
     implementation 'com.google.android.gms:play-services-auth:16.0.0'
-    implementation 'com.google.firebase:firebase-firestore:15.0.0'
 
+    implementation 'com.google.firebase:firebase-core:16.0.4'
+    implementation 'com.google.firebase:firebase-firestore:17.1.1'
+    implementation 'com.google.firebase:firebase-auth:16.0.4'
+    implementation 'com.google.firebase:firebase-storage:16.0.3'
 
-    implementation 'com.google.firebase:firebase-core:16.0.1'
-    implementation 'com.google.firebase:firebase-auth:16.0.1'
-    implementation 'com.google.firebase:firebase-storage:16.0.1'
-    implementation 'com.google.firebase:firebase-firestore:15.0.0'
 
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.xwray:groupie:2.1.0'
