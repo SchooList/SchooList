@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.net.HttpURLConnection;
 import java.util.List;
 
@@ -34,8 +36,9 @@ public class ListaAlunosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
-        listaAlunos = (ListView) findViewById(R.id.lista_alunos);
+        verifyAuthentication();
 
+        listaAlunos = (ListView) findViewById(R.id.lista_alunos);
         listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
@@ -67,6 +70,15 @@ public class ListaAlunosActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void verifyAuthentication() {
+        if(FirebaseAuth.getInstance().getUid() == null) {
+            Intent backtoLogin = new Intent(ListaAlunosActivity.this, LoginActivity.class);
+            backtoLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(backtoLogin);
+        }
+    }
+
     private void carregaLista() {
         AlunoDAO dao = AlunoDAO.getInstance(this);
         List<Aluno> alunos = dao.buscaAlunos();
@@ -101,6 +113,10 @@ public class ListaAlunosActivity extends AppCompatActivity {
             case R.id.menu_mapa:
                 Intent vaiParaMapa = new Intent(ListaAlunosActivity.this, MapsActivity.class);
                 startActivity(vaiParaMapa);
+                break;
+            case R.id.menuVerPerfil:
+                Intent goToProfile = new Intent(ListaAlunosActivity.this, ProfileActivity.class);
+                startActivity(goToProfile);
                 break;
         }
         return super.onOptionsItemSelected(item);

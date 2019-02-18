@@ -9,6 +9,13 @@
         android:title="Enviar notas"
         app:showAsAction="never" />
     <item
+        android:id="@+id/menuVerPerfil"
+        android:icon="@drawable/ic_enviar"
+        android:orderInCategory="100"
+        android:title="Perfil"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/menu_baixar_provas"
         android:title="Baixar Provas"
         android:icon="@drawable/ic_receber"
