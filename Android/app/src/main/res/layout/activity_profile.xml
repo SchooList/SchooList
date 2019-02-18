@@ -7,24 +7,33 @@
     tools:context=".ProfileActivity">
 
 
+    <Button
+        android:id="@+id/bnt_logout"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/bg_buttom_rounded"
+        android:text="Sair"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/typeUser" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/photoProfile"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_selected_photo"
-        app:layout_constraintEnd_toEndOf="@+id/btn_selected_photo"
-        app:layout_constraintStart_toStartOf="@+id/btn_selected_photo"
-        app:layout_constraintTop_toTopOf="@+id/btn_selected_photo" />
-
-    <Button
-        android:id="@+id/btn_selected_photo2"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/person"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,13 +44,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Name: "
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_selected_photo2" />
+        app:layout_constraintTop_toBottomOf="@+id/photoProfile" />
 
     <EditText
         android:id="@+id/typeUser"

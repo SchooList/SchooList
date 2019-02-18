@@ -59,7 +59,7 @@ public class User implements Parcelable {
         return tipo;
     }
 
-    public void setTipo() {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 

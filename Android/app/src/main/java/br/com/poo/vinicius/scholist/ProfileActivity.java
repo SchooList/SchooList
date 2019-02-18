@@ -1,8 +1,11 @@
 package br.com.poo.vinicius.scholist;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -30,6 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView imageProfile;
     EditText editUsername;
     EditText typeUser;
+    Button btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +42,24 @@ public class ProfileActivity extends AppCompatActivity {
         imageProfile = findViewById(R.id.photoProfile);
         editUsername = findViewById(R.id.userNameEdit);
         typeUser = findViewById(R.id.typeUser);
-        getUser();
+        btnLogout = findViewById(R.id.bnt_logout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            logout();
+            }
+        });
 
+
+        getUser();
+    }
+
+    public void logout() {
+           FirebaseAuth.getInstance().signOut();
+           Intent intentSignOut = new Intent(ProfileActivity.this, LoginActivity.class);
 
     }
+
 
 
     public void getUser() {
@@ -53,6 +71,8 @@ public class ProfileActivity extends AppCompatActivity {
                    return;
                } else {
                    List<DocumentSnapshot> docs = queryDocumentSnapshots.getDocuments();
+
+
                    for (DocumentSnapshot doc: docs) {
                        User user = doc.toObject(User.class);
 
