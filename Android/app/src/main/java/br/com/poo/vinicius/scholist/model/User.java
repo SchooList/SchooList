@@ -15,6 +15,8 @@ public class User implements Parcelable {
     }
 
 
+
+
     public User(String uuid, String username, String profileUrl, String tipo) {
         this.uuid = uuid;
         this.username = username;
@@ -52,6 +54,15 @@ public class User implements Parcelable {
     public String getProfileUrl() {
         return profileUrl;
     }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo() {
+        this.tipo = tipo;
+    }
+
 
     @Override
     public int describeContents() {
