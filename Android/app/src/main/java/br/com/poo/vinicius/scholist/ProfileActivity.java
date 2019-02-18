@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -64,30 +65,21 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     public void getUser() {
-       CollectionReference doc = FirebaseFirestore.getInstance().collection("/users");
-       doc.addSnapshotListener(new EventListener<QuerySnapshot>() {
-           @Override
-           public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-               if(e != null ) {
-                   return;
-               } else {
-                   List<DocumentSnapshot> docs = queryDocumentSnapshots.getDocuments();
 
-
-                   for (DocumentSnapshot doc: docs) {
-                       User user = doc.toObject(User.class);
-
+        FirebaseFirestore.getInstance().collection("/users")
+                .document(FirebaseAuth.getInstance().getUid())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        User user = documentSnapshot.toObject(User.class);
                         editUsername.setText("Name: " + user.getUsername(), null);
                         typeUser.setText("Type: " + user.getTipo(),null);
-                       Picasso.get()
-                               .load(user.getProfileUrl())
-                               .into(imageProfile);
-                       Log.d("Teste", "onEvent" + user.getUsername());
-                   }
-                   
-               }
-           }
-       });
+                        Picasso.get()
+                                .load(user.getProfileUrl())
+                                .into(imageProfile);
+                        Log.d("Teste", "onEvent" + user.getUsername());
+                    }
+                });
     }
-
 }

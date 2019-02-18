@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                         Log.i("Sucesso", task.getResult().getUser().getUid());
                         Intent intent = new Intent(LoginActivity.this, ListaAlunosActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
