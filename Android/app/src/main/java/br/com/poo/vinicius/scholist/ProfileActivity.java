@@ -29,14 +29,11 @@ import javax.annotation.Nullable;
 import br.com.poo.vinicius.scholist.model.User;
 
 public class ProfileActivity extends AppCompatActivity {
-
-
     ImageView imageProfile;
     EditText editUsername;
     EditText typeUser;
     EditText editEmail;
     Button btnLogout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,22 +49,15 @@ public class ProfileActivity extends AppCompatActivity {
             logout();
             }
         });
-
-
         getUser();
     }
-
     public void logout() {
            FirebaseAuth.getInstance().signOut();
            Intent intentSignOut = new Intent(ProfileActivity.this, LoginActivity.class);
            startActivity(intentSignOut);
            finish();
     }
-
-
-
     public void getUser() {
-
         FirebaseFirestore.getInstance().collection("/users")
                 .document(FirebaseAuth.getInstance().getUid())
                 .get()

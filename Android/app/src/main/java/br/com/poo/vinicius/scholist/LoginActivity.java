@@ -29,28 +29,19 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-
-
         final EditText mEditEmail = findViewById(R.id.edit_email);
         final EditText mEditPassword = findViewById(R.id.edit_password);
-
-
         Button btnEnter = (Button) findViewById(R.id.btn_enter);
         TextView txtAccount = (TextView) findViewById(R.id.txt_account);
-
-
         btnEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = mEditEmail.getText().toString();
                 String senha = mEditPassword.getText().toString();
-
                 if(email == null || email.isEmpty() || senha.isEmpty() || senha == null) {
                     Toast.makeText(LoginActivity.this, "Nome e Senha devem ser preenchidos", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -78,12 +69,5 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
-
-
-
-
     }
 }
