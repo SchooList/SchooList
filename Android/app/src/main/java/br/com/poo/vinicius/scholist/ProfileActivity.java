@@ -35,7 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        imageProfile = findViewById(R.id.img_photoProfile);
+        imageProfile = findViewById(R.id.photoProfile);
         editUsername = findViewById(R.id.userNameEdit);
         typeUser = findViewById(R.id.typeUser);
         getUser();
@@ -61,11 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
                        Picasso.get()
                                .load(user.getProfileUrl())
                                .into(imageProfile);
-
-
                        Log.d("Teste", "onEvent" + user.getUsername());
-
-
                    }
                    
                }

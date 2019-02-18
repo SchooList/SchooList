@@ -147,9 +147,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 String username = mEditUsername.getText().toString();
                                 String profileUrl = uri.toString();
 
-                                String tipo = "aluno";
+                                String tipo = "Aluno";
                                 if(professorUser.isChecked()) {
-                                    tipo = "professor";
+                                    tipo = "Professor";
                                 }
 
 
