@@ -34,6 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView imageProfile;
     EditText editUsername;
     EditText typeUser;
+    EditText editEmail;
     Button btnLogout;
 
     @Override
@@ -43,6 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
         imageProfile = findViewById(R.id.photoProfile);
         editUsername = findViewById(R.id.userNameEdit);
         typeUser = findViewById(R.id.typeUser);
+        editEmail = findViewById(R.id.editEmail);
         btnLogout = findViewById(R.id.bnt_logout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +77,8 @@ public class ProfileActivity extends AppCompatActivity {
                         User user = documentSnapshot.toObject(User.class);
                         editUsername.setText("Name: " + user.getUsername(), null);
                         typeUser.setText("Type: " + user.getTipo(),null);
+                        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                        editEmail.setText("Email: " + email, null);
                         Picasso.get()
                                 .load(user.getProfileUrl())
                                 .into(imageProfile);
