@@ -20,7 +20,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.net.HttpURLConnection;
 import java.util.List;
@@ -29,21 +34,23 @@ import br.com.poo.vinicius.scholist.adapter.AlunosAdapter;
 import br.com.poo.vinicius.scholist.converter.AlunoConverter;
 import br.com.poo.vinicius.scholist.dao.AlunoDAO;
 import br.com.poo.vinicius.scholist.model.Aluno;
+import br.com.poo.vinicius.scholist.model.User;
 
 public class ListaAlunosActivity extends AppCompatActivity {
     ListView listaAlunos;
+    Button novoAluno;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
+        verifyTypeUser();
         verifyAuthentication();
-
+        novoAluno = findViewById(R.id.novo_aluno);
         listaAlunos = (ListView) findViewById(R.id.lista_alunos);
         listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
                 Aluno aluno = (Aluno) lista.getItemAtPosition(position);
-
                 Intent intentToFormWithDates = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
                 intentToFormWithDates.putExtra("aluno", aluno);
                 startActivity(intentToFormWithDates);
@@ -61,12 +68,26 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
         registerForContextMenu(listaAlunos);
 
-        Button novoAluno = findViewById(R.id.novo_aluno);
+
         novoAluno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentToForm = new Intent(ListaAlunosActivity.this,FormularioActivity.class);
                 startActivity(intentToForm);
+            }
+        });
+    }
+
+    private void verifyTypeUser() {
+        FirebaseFirestore.getInstance().collection("/users").document(FirebaseAuth.getInstance().getUid())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                User user = documentSnapshot.toObject(User.class);
+                if(user.getTipo().equals("Aluno")) {
+                    novoAluno.setAlpha(0);
+                    novoAluno.setEnabled(false);
+                }
             }
         });
     }
