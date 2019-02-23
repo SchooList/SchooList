@@ -43,7 +43,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
-        verifyTypeUser();
+
         verifyAuthentication();
         novoAluno = findViewById(R.id.novo_aluno);
         listaAlunos = (ListView) findViewById(R.id.lista_alunos);
@@ -78,19 +78,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
         });
     }
 
-    private void verifyTypeUser() {
-        FirebaseFirestore.getInstance().collection("/users").document(FirebaseAuth.getInstance().getUid())
-                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                User user = documentSnapshot.toObject(User.class);
-                if(user.getTipo().equals("Aluno")) {
-                    novoAluno.setAlpha(0);
-                    novoAluno.setEnabled(false);
-                }
-            }
-        });
-    }
+
 
     private void verifyAuthentication() {
         if(FirebaseAuth.getInstance().getUid() == null) {

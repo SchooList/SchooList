@@ -41,6 +41,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/photoProfile"
+        app:civ_border_color="@color/colorPrimary"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="8dp"
