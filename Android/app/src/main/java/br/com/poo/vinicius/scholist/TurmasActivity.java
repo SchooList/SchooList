@@ -7,7 +7,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,12 +40,13 @@ public class TurmasActivity extends AppCompatActivity {
 
     GroupAdapter adapter;
     Button btnNovaTurma;
+    RecyclerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_turmas);
-        RecyclerView rv = findViewById(R.id.recycler);
+        rv = findViewById(R.id.recycler);
         btnNovaTurma = findViewById(R.id.nova_turma);
 
         verifyAuthentication();
@@ -73,6 +78,30 @@ public class TurmasActivity extends AppCompatActivity {
                 startActivity(intentNewTurma);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_lista_turmas, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_profile_aluno:
+                Intent intentProfile = new Intent(TurmasActivity.this, ProfileActivity.class);
+                startActivity(intentProfile);
+                break;
+            case R.id.menu_profile_search:
+                break;
+
+
+        }
+
+
+
+        return super.onOptionsItemSelected(item);
     }
 
     void verifyTypeUser() {

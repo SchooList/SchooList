@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        android:src="@drawable/sl_splash" />
+        android:src="@drawable/background_turmas" />
 
     <View
         android:id="@+id/turma_divisor"

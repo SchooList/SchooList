@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="br.com.poo.vinicius.scholist">
+
+    <item
+        android:id="@+id/menu_profile_search"
+        android:title="Visualizar mapa"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="always"
+        ></item>
+
+    <item
+        android:id="@+id/menu_profile_aluno"
+        android:title="Visualizar mapa"
+        android:icon="@drawable/ic_profile"
+        app:showAsAction="always"
+        ></item>
+
+
+
+
+
+</menu>

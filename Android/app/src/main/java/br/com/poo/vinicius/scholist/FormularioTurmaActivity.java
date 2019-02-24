@@ -36,9 +36,6 @@ import br.com.poo.vinicius.scholist.model.Turma;
 import br.com.poo.vinicius.scholist.model.User;
 
 public class FormularioTurmaActivity extends AppCompatActivity {
-
-
-
     Button btnNovaTurma;
     EditText editNome;
     EditText editDescricao;
@@ -55,28 +52,19 @@ public class FormularioTurmaActivity extends AppCompatActivity {
         editNome = findViewById(R.id.formulario_turma_nome);
         btnSelectedPhoto = findViewById(R.id.btn_selected_photo);
         imagePhoto = findViewById(R.id.formulario_turma_imageView);
-
         btnNovaTurma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createTurmaInFirebase();
             }
         });
-
-
         btnSelectedPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectPhoto();
             }
         });
-
     }
-
-
-
-
-
 
     private void createTurmaInFirebase() {
         final String nome = editNome.getText().toString();
@@ -85,7 +73,6 @@ public class FormularioTurmaActivity extends AppCompatActivity {
             Toast.makeText(this, "Nome e Descrição da turma devem ser preenchidos", Toast.LENGTH_SHORT).show();
             return;
         }
-
         String filename = UUID.randomUUID().toString();
 
         final StorageReference ref = FirebaseStorage.getInstance().getReference("/images/" + filename);
@@ -100,7 +87,9 @@ public class FormularioTurmaActivity extends AppCompatActivity {
                                 final String[] uid = new String[]{UUID.randomUUID().toString()};
                                 String adminUuid = FirebaseAuth.getInstance().getUid().toString();
 
+
                                 Turma turma = new Turma(nome, descricao, profileUrl, uid[0], adminUuid);
+
 
                                 CollectionReference doc = FirebaseFirestore.getInstance().collection("/turmas");
                                 doc.document()

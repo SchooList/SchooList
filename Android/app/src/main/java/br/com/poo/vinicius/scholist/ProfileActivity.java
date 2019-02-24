@@ -49,6 +49,11 @@ public class ProfileActivity extends AppCompatActivity {
             logout();
             }
         });
+
+
+        editEmail.setEnabled(false);
+        typeUser.setEnabled(false);
+        editUsername.setEnabled(false);
         getUser();
     }
     public void logout() {
