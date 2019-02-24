@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -55,7 +56,6 @@ public class FormularioTurmaActivity extends AppCompatActivity {
         btnSelectedPhoto = findViewById(R.id.btn_selected_photo);
         imagePhoto = findViewById(R.id.formulario_turma_imageView);
 
-
         btnNovaTurma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +81,6 @@ public class FormularioTurmaActivity extends AppCompatActivity {
     private void createTurmaInFirebase() {
         final String nome = editNome.getText().toString();
         final String descricao = editDescricao.getText().toString();
-
         if(nome.isEmpty() || descricao.isEmpty() || nome == null || descricao == null) {
             Toast.makeText(this, "Nome e Descrição da turma devem ser preenchidos", Toast.LENGTH_SHORT).show();
             return;
@@ -98,7 +97,10 @@ public class FormularioTurmaActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri uri) {
                                 String profileUrl = uri.toString();
-                                Turma turma = new Turma(nome, descricao, profileUrl);
+                                final String[] uid = new String[]{UUID.randomUUID().toString()};
+                                String adminUuid = FirebaseAuth.getInstance().getUid().toString();
+
+                                Turma turma = new Turma(nome, descricao, profileUrl, uid[0], adminUuid);
 
                                 CollectionReference doc = FirebaseFirestore.getInstance().collection("/turmas");
                                 doc.document()

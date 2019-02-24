@@ -10,12 +10,11 @@ public class User implements Parcelable {
     private String username;
     private String profileUrl;
     private String tipo;
+    private String idTurmas[];
+
     public User() {
 
     }
-
-
-
 
     public User(String uuid, String username, String profileUrl, String tipo) {
         this.uuid = uuid;
@@ -63,6 +62,13 @@ public class User implements Parcelable {
         this.tipo = tipo;
     }
 
+    public String[] getIdTurmas() {
+        return idTurmas;
+    }
+
+    public void setIdTurmas(String[] idTurmas) {
+        this.idTurmas = idTurmas;
+    }
 
     @Override
     public int describeContents() {

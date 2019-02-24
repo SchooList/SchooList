@@ -10,16 +10,16 @@ public class Turma implements Parcelable {
     String descricao;
     String profileUrl;
     String uuid;
-    User users[];
+    String uuidAdmin;
 
-    public Turma() {
+    public Turma() {}
 
-    }
-
-    public Turma(String nome, String descricao, String profileUrl){
+    public Turma(String nome, String descricao, String profileUrl, String uuid, String uuidAdmin){
         this.nome = nome;
         this.descricao = descricao;
         this.profileUrl = profileUrl;
+        this.uuid = uuid;
+        this.uuidAdmin = uuidAdmin;
     }
 
     protected Turma(Parcel in) {
@@ -27,6 +27,7 @@ public class Turma implements Parcelable {
         nome = in.readString();
         descricao = in.readString();
         profileUrl = in.readString();
+        uuidAdmin = in.readString();
     }
 
 
@@ -66,13 +67,15 @@ public class Turma implements Parcelable {
         this.uuid = uuid;
     }
 
-    public User[] getUsers() {
-        return users;
+    public String getUuidAdmin() {
+        return uuidAdmin;
     }
 
-    public void setUsers(User[] users) {
-        this.users = users;
+    public void setUuidAdmin(String uuidAdmin) {
+        this.uuidAdmin = uuidAdmin;
     }
+
+
 
     @Override
     public int describeContents() {
@@ -97,5 +100,6 @@ public class Turma implements Parcelable {
         dest.writeString(nome);
         dest.writeString(descricao);
         dest.writeString(profileUrl);
+        dest.writeString(uuidAdmin);
     }
 }
