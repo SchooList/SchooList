@@ -41,7 +41,6 @@ public class TurmasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_turmas);
-        verifyTypeUser();
         RecyclerView rv = findViewById(R.id.recycler);
         btnNovaTurma = findViewById(R.id.nova_turma);
 

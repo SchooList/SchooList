@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.i("Sucesso", task.getResult().getUser().getUid());
-                        Intent intent = new Intent(LoginActivity.this, ListaAlunosActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, TurmasActivity.class);
                         startActivity(intent);
                         finish();
                     }
