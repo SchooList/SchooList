@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+
+
     <ImageView
         android:id="@+id/turma_imageView"
         android:layout_width="0dp"
@@ -71,8 +73,27 @@
         app:layout_constraintStart_toStartOf="@id/turma_textViewDescricao"
         android:textSize="20sp"
         android:textColor="@android:color/holo_green_dark"
-
-
         />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="8dp"
+        android:background="#ededed"
+        app:layout_constraintTop_toBottomOf="@+id/turma_atividades"
+        tools:layout_editor_absoluteX="8dp"></View>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view3"></View>
 
 </android.support.constraint.ConstraintLayout>

@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ import br.com.poo.vinicius.scholist.model.User;
 public class TurmasActivity extends AppCompatActivity {
 
     GroupAdapter adapter;
+    Button btnNovaTurma;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class TurmasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_turmas);
 
         RecyclerView rv = findViewById(R.id.recycler);
+        btnNovaTurma = findViewById(R.id.nova_turma);
 
         adapter = new GroupAdapter<>();
         rv.setAdapter(adapter);
@@ -56,6 +59,17 @@ public class TurmasActivity extends AppCompatActivity {
         });
 
         fetchTurmas();
+
+
+        btnNovaTurma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentNewTurma = new Intent(TurmasActivity.this, FormularioTurmaActivity.class);
+                startActivity(intentNewTurma);
+            }
+        });
+
+
 
 
     }
@@ -80,7 +94,6 @@ public class TurmasActivity extends AppCompatActivity {
 
 
     }
-
 
     private class TurmaItem extends Item<ViewHolder> {
 

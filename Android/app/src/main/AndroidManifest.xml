@@ -19,6 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".FormularioTurmaActivity"></activity>
         <activity android:name=".TurmasActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,9 +48,7 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
-        <activity android:name=".SplashActivity">
-
-        </activity>
+        <activity android:name=".SplashActivity"></activity>
         <activity android:name=".ProvasActivity" />
         <activity android:name=".DetalhesProvaActivity" />
         <activity android:name=".ProvasTabletActivity" />

@@ -19,7 +19,7 @@
         tools:listitem="@layout/item_turma" />
 
     <Button
-        android:id="@+id/novo_aluno"
+        android:id="@+id/nova_turma"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginStart="8dp"

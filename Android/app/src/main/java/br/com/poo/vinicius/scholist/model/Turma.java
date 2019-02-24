@@ -19,6 +19,7 @@ public class Turma implements Parcelable {
     public Turma(String nome, String descricao, String profileUrl){
         this.nome = nome;
         this.descricao = descricao;
+        this.profileUrl = profileUrl;
     }
 
     protected Turma(Parcel in) {
