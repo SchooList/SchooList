@@ -1,23 +1,18 @@
 package br.com.poo.vinicius.scholist;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,105 +29,45 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import br.com.poo.vinicius.scholist.model.Turma;
-import br.com.poo.vinicius.scholist.model.User;
 
-public class TurmasActivity extends AppCompatActivity {
+public class SearchTurmasActivity extends AppCompatActivity {
+
 
     GroupAdapter adapter;
-    Button btnNovaTurma;
     RecyclerView rv;
+    EditText nameTurma;
+    ImageButton btnSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_turmas);
-        rv = findViewById(R.id.recycler);
-        btnNovaTurma = findViewById(R.id.nova_turma);
-
-        verifyAuthentication();
-        verifyTypeUser();
-
-        adapter = new GroupAdapter<>();
+        setContentView(R.layout.activity_search_turmas);
+        btnSearch = findViewById(R.id.btnSearchTurma);
+        rv = findViewById(R.id.searchTurmasReciclyerView);
+        nameTurma = findViewById(R.id.searchNameTurma);
+        adapter = new GroupAdapter();
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
-
-
 
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull Item item, @NonNull View view) {
-                Intent intent = new Intent(TurmasActivity.this, ListaAlunosActivity.class);
-                TurmaItem turmaItem = (TurmaItem)item;
-                intent.putExtra("turma",turmaItem.turma);
-                startActivity(intent);
+                //Moviment here
             }
         });
 
-        fetchTurmas();
-
-
-        btnNovaTurma.setOnClickListener(new View.OnClickListener() {
+        btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentNewTurma = new Intent(TurmasActivity.this, FormularioTurmaActivity.class);
-                startActivity(intentNewTurma);
+                fetchTurmas();
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_lista_turmas, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_profile_aluno:
-                Intent intentProfile = new Intent(TurmasActivity.this, ProfileActivity.class);
-                startActivity(intentProfile);
-                break;
-            case R.id.menu_profile_search:
-                Intent searchTurma = new Intent(TurmasActivity.this, SearchTurmasActivity.class);
-                startActivity(searchTurma);
-                break;
-
-
-        }
-
-
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    void verifyTypeUser() {
-        FirebaseFirestore.getInstance().collection("/users")
-                .document(FirebaseAuth.getInstance().getUid())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        User user = documentSnapshot.toObject(User.class);
-                        if(user.getTipo().equals("Aluno")) {
-                            System.out.print(user.getUsername());
-                            btnNovaTurma.setAlpha(0);
-                            btnNovaTurma.setEnabled(false);
-                        }
-                    }
-                });
-
 
     }
 
-    private void verifyAuthentication() {
-        if(FirebaseAuth.getInstance().getUid() == null) {
-            Intent backtoLogin = new Intent(TurmasActivity.this, LoginActivity.class);
-            backtoLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(backtoLogin);
-        }
-    }
+
     private void fetchTurmas() {
+        final String nomeTurma = nameTurma.getText().toString();
         FirebaseFirestore.getInstance().collection("/turmas")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -144,14 +79,21 @@ public class TurmasActivity extends AppCompatActivity {
                         List<DocumentSnapshot> docs = queryDocumentSnapshots.getDocuments();
                         for (DocumentSnapshot doc: docs) {
                             Turma turma = doc.toObject(Turma.class);
-                            adapter.add(new TurmaItem(turma));
+
+                            if(turma.getNome().equals(nomeTurma)) {
+                                adapter.add(new SearchTurmasActivity.TurmaItem(turma));
+                            } 
+
+
                         }
-                        
+
                     }
                 });
 
 
     }
+
+
 
     private class TurmaItem extends Item<ViewHolder> {
 
@@ -177,12 +119,6 @@ public class TurmasActivity extends AppCompatActivity {
             return R.layout.item_turma;
         }
     }
+
+
 }
-
-
-
-
-
-
-
-

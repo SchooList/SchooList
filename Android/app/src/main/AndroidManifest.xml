@@ -19,10 +19,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FormularioTurmaActivity"></activity>
-        <activity android:name=".TurmasActivity">
-
-        </activity>
+        <activity android:name=".SearchTurmasActivity"></activity>
+        <activity android:name=".FormularioTurmaActivity" />
+        <activity android:name=".TurmasActivity"></activity>
         <activity android:name=".ListaAlunosActivity" />
         <activity android:name=".FormularioActivity" />
 
@@ -50,7 +49,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".ProvasActivity" />
         <activity android:name=".DetalhesProvaActivity" />
