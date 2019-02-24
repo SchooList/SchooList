@@ -21,15 +21,18 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.UUID;
 
 import br.com.poo.vinicius.scholist.model.Turma;
+import br.com.poo.vinicius.scholist.model.User;
 
 public class FormularioTurmaActivity extends AppCompatActivity {
 
@@ -52,7 +55,6 @@ public class FormularioTurmaActivity extends AppCompatActivity {
         btnSelectedPhoto = findViewById(R.id.btn_selected_photo);
         imagePhoto = findViewById(R.id.formulario_turma_imageView);
 
-        verifyAuthentication();
 
         btnNovaTurma.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,13 +73,10 @@ public class FormularioTurmaActivity extends AppCompatActivity {
 
     }
 
-    private void verifyAuthentication() {
-            if(FirebaseAuth.getInstance().getUid() == null) {
-                Intent backtoLogin = new Intent(FormularioTurmaActivity.this, LoginActivity.class);
-                backtoLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(backtoLogin);
-            }
-    }
+
+
+
+
 
     private void createTurmaInFirebase() {
         final String nome = editNome.getText().toString();

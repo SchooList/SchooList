@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -39,14 +41,18 @@ public class TurmasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_turmas);
-
+        verifyTypeUser();
         RecyclerView rv = findViewById(R.id.recycler);
         btnNovaTurma = findViewById(R.id.nova_turma);
 
+        verifyAuthentication();
+        verifyTypeUser();
+
         adapter = new GroupAdapter<>();
         rv.setAdapter(adapter);
-
         rv.setLayoutManager(new LinearLayoutManager(this));
+
+
 
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -68,12 +74,34 @@ public class TurmasActivity extends AppCompatActivity {
                 startActivity(intentNewTurma);
             }
         });
+    }
 
-
+    void verifyTypeUser() {
+        FirebaseFirestore.getInstance().collection("/users")
+                .document(FirebaseAuth.getInstance().getUid())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        User user = documentSnapshot.toObject(User.class);
+                        if(user.getTipo().equals("Aluno")) {
+                            System.out.print(user.getUsername());
+                            btnNovaTurma.setAlpha(0);
+                            btnNovaTurma.setEnabled(false);
+                        }
+                    }
+                });
 
 
     }
 
+    private void verifyAuthentication() {
+        if(FirebaseAuth.getInstance().getUid() == null) {
+            Intent backtoLogin = new Intent(TurmasActivity.this, LoginActivity.class);
+            backtoLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(backtoLogin);
+        }
+    }
     private void fetchTurmas() {
         FirebaseFirestore.getInstance().collection("/turmas")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
