@@ -43,8 +43,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
-
-
         novoAluno = findViewById(R.id.novo_aluno);
         listaAlunos = (ListView) findViewById(R.id.lista_alunos);
         listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
