@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/turma_imageView"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sl_splash" />
+
+    <TextView
+        android:id="@+id/turma_textViewNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="São Paulo"
+        app:layout_constraintStart_toStartOf="@+id/turma_imageView"
+        app:layout_constraintEnd_toEndOf="@id/turma_imageView"
+        app:layout_constraintTop_toTopOf="@id/turma_imageView"
+        app:layout_constraintBottom_toBottomOf="@id/turma_imageView"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:textSize="14sp"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:background="@android:drawable/screen_background_dark_transparent"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        />
+    
+    <View
+        android:id="@+id/turma_divisor"
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:background="@android:color/holo_orange_dark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/turma_imageView"
+        ></View>
+    
+
+    <TextView
+        android:id="@+id/turma_textViewDescricao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descrição"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/turma_divisor"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_margin="8dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+    />
+
+    <TextView
+        android:id="@+id/turma_atividades"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Atividades: "
+        app:layout_constraintTop_toBottomOf="@id/turma_textViewDescricao"
+        app:layout_constraintStart_toStartOf="@id/turma_textViewDescricao"
+        android:textSize="20sp"
+        android:textColor="@android:color/holo_green_dark"
+
+
+        />
+
+</android.support.constraint.ConstraintLayout>
