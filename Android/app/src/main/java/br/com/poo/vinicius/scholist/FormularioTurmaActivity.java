@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -51,6 +52,8 @@ public class FormularioTurmaActivity extends AppCompatActivity {
         btnSelectedPhoto = findViewById(R.id.btn_selected_photo);
         imagePhoto = findViewById(R.id.formulario_turma_imageView);
 
+        verifyAuthentication();
+
         btnNovaTurma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +69,14 @@ public class FormularioTurmaActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void verifyAuthentication() {
+            if(FirebaseAuth.getInstance().getUid() == null) {
+                Intent backtoLogin = new Intent(FormularioTurmaActivity.this, LoginActivity.class);
+                backtoLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(backtoLogin);
+            }
     }
 
     private void createTurmaInFirebase() {
@@ -118,10 +129,9 @@ public class FormularioTurmaActivity extends AppCompatActivity {
                 return;
             }
         });
-
-
-
     }
+
+
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

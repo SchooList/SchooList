@@ -21,11 +21,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".FormularioTurmaActivity"></activity>
         <activity android:name=".TurmasActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ListaAlunosActivity" />
         <activity android:name=".FormularioActivity" />
@@ -48,7 +44,14 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
-        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity android:name=".ProvasActivity" />
         <activity android:name=".DetalhesProvaActivity" />
         <activity android:name=".ProvasTabletActivity" />

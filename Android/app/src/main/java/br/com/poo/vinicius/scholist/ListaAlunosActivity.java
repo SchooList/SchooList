@@ -44,7 +44,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
 
-        verifyAuthentication();
+
         novoAluno = findViewById(R.id.novo_aluno);
         listaAlunos = (ListView) findViewById(R.id.lista_alunos);
         listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -80,13 +80,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
 
 
-    private void verifyAuthentication() {
-        if(FirebaseAuth.getInstance().getUid() == null) {
-            Intent backtoLogin = new Intent(ListaAlunosActivity.this, LoginActivity.class);
-            backtoLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(backtoLogin);
-        }
-    }
+
 
     private void carregaLista() {
         AlunoDAO dao = AlunoDAO.getInstance(this);
