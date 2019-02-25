@@ -1,6 +1,8 @@
 package br.com.poo.vinicius.scholist;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,7 +52,7 @@ public class TurmasActivity extends AppCompatActivity {
         btnNovaTurma = findViewById(R.id.nova_turma);
 
         verifyAuthentication();
-        verifyTypeUser();
+
 
         adapter = new GroupAdapter<>();
         rv.setAdapter(adapter);
@@ -125,12 +127,17 @@ public class TurmasActivity extends AppCompatActivity {
 
     }
 
+
+
     private void verifyAuthentication() {
         if(FirebaseAuth.getInstance().getUid() == null) {
             Intent backtoLogin = new Intent(TurmasActivity.this, LoginActivity.class);
             backtoLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(backtoLogin);
+        } else{
+            verifyTypeUser();
         }
+
     }
     private void fetchTurmas() {
         FirebaseFirestore.getInstance().collection("/turmas")

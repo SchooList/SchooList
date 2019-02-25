@@ -82,7 +82,7 @@ public class SearchTurmasActivity extends AppCompatActivity {
 
                             if(turma.getNome().equals(nomeTurma)) {
                                 adapter.add(new SearchTurmasActivity.TurmaItem(turma));
-                            } 
+                            }
 
 
                         }
