@@ -127,8 +127,6 @@ public class TurmasActivity extends AppCompatActivity {
 
     }
 
-
-
     private void verifyAuthentication() {
         if(FirebaseAuth.getInstance().getUid() == null) {
             Intent backtoLogin = new Intent(TurmasActivity.this, LoginActivity.class);

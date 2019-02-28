@@ -1,5 +1,6 @@
 package br.com.poo.vinicius.scholist;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,7 +38,7 @@ public class SearchTurmasActivity extends AppCompatActivity {
     RecyclerView rv;
     EditText nameTurma;
     ImageButton btnSearch;
-
+    Turma turma;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +53,10 @@ public class SearchTurmasActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull Item item, @NonNull View view) {
-                //Moviment here
+                Intent intent = new Intent(SearchTurmasActivity.this, EntrarNaTurmaActivity.class);
+                SearchTurmasActivity.TurmaItem turmaItem = (SearchTurmasActivity.TurmaItem)item;
+                intent.putExtra("turma",turmaItem.turma);
+                startActivity(intent);
             }
         });
 
@@ -78,7 +82,7 @@ public class SearchTurmasActivity extends AppCompatActivity {
                         }
                         List<DocumentSnapshot> docs = queryDocumentSnapshots.getDocuments();
                         for (DocumentSnapshot doc: docs) {
-                            Turma turma = doc.toObject(Turma.class);
+                            turma = doc.toObject(Turma.class);
 
                             if(turma.getNome().equals(nomeTurma)) {
                                 adapter.add(new SearchTurmasActivity.TurmaItem(turma));

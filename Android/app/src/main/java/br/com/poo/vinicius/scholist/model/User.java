@@ -11,6 +11,8 @@ public class User implements Parcelable {
     private String profileUrl;
     private String tipo;
     private String idTurmas[];
+    Turma turmas;
+
 
     public User() {
 
