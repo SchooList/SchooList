@@ -58,44 +58,32 @@ public class ProfileActivity extends AppCompatActivity {
         editEmail = findViewById(R.id.editEmail);
         btnLogout = findViewById(R.id.bnt_logout);
         btnSelectedPhoto = findViewById(R.id.btn_selected_photo);
-
-
         btnSelectedPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectPhoto();
             }
         });
-
-
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             logout();
             }
         });
-
-
         editEmail.setEnabled(false);
         typeUser.setEnabled(false);
-
-
-
         getUser();
     }
-
     private void selectPhoto() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, 0);
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_profile, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
@@ -107,7 +95,6 @@ public class ProfileActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
     private void updateDatesinUser() {
         String newName = editUsername.getText().toString();
 
@@ -128,27 +115,18 @@ public class ProfileActivity extends AppCompatActivity {
                         ref.update("profileUrl", profileUrl).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(ProfileActivity.this,"Dados alterados com sucesso!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProfileActivity.this, "Dados alterados com sucesso!", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
                 });
             }
         });
-
-
-
-
-
-
         ref.update("username", newName).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
             }
         });
-
-
-
     }
 
     public void logout() {
@@ -176,8 +154,6 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
