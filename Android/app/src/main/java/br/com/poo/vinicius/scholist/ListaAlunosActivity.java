@@ -76,10 +76,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-
     private void carregaLista() {
         AlunoDAO dao = AlunoDAO.getInstance(this);
         List<Aluno> alunos = dao.buscaAlunos();
@@ -111,7 +107,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 startActivity(intentGoToProof);
                 break;
             case R.id.menu_mapa:
-                Intent vaiParaMapa = new Intent(ListaAlunosActivity.this, MapsActivity.class);
+                Intent vaiParaMapa = new Intent(ListaAlunosActivity.this, MapaActivity.class);
                 startActivity(vaiParaMapa);
                 break;
             case R.id.menuVerPerfil:
