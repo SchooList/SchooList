@@ -29,6 +29,7 @@ import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
 import com.xwray.groupie.Item;
 import com.xwray.groupie.OnItemClickListener;
+import com.xwray.groupie.OnItemLongClickListener;
 import com.xwray.groupie.ViewHolder;
 
 import java.util.List;
@@ -59,11 +60,24 @@ public class TurmasActivity extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
 
 
+       adapter.setOnItemLongClickListener(new OnItemLongClickListener() {
+           @Override
+           public boolean onItemLongClick(@NonNull Item item, @NonNull View view) {
+             Intent intent = new Intent(TurmasActivity.this,ChatActivity.class );
+             TurmaItem turmaItem = (TurmaItem)item;
+             intent.putExtra("turma",turmaItem.turma);
+             startActivity(intent);
+
+
+
+               return false;
+           }
+       });
 
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull Item item, @NonNull View view) {
-                Intent intent = new Intent(TurmasActivity.this, ListaAlunosActivity.class);
+                Intent intent = new Intent(TurmasActivity.this, ListaAtividadesActivity.class);
                 TurmaItem turmaItem = (TurmaItem)item;
                 intent.putExtra("turma",turmaItem.turma);
                 startActivity(intent);

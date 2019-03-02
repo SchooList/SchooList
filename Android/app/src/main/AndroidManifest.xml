@@ -19,11 +19,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EntrarNaTurmaActivity"></activity>
+        <activity android:name=".NewPostActivity"></activity>
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".EntrarNaTurmaActivity" />
         <activity android:name=".SearchTurmasActivity" />
         <activity android:name=".FormularioTurmaActivity" />
         <activity android:name=".TurmasActivity" />
         <activity android:name=".ListaAlunosActivity" />
+        <activity android:name=".ListaAtividadesActivity" />
         <activity android:name=".FormularioActivity" />
 
         <receiver
