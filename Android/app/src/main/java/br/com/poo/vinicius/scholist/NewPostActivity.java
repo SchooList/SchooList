@@ -71,6 +71,9 @@ public class NewPostActivity extends AppCompatActivity {
 
         Post post = new Post(descricao,timestamp);
 
+
+
+
         FirebaseFirestore.getInstance().collection("/turmas")
                 .document(turma.getUuid()).collection("/posts").add(post).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override

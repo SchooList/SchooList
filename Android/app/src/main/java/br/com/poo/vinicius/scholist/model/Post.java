@@ -11,6 +11,24 @@ public class Post implements Parcelable {
     String descricao;
     String timestamp;
 
+    Post() {}
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(descricao);
         dest.writeString(timestamp);

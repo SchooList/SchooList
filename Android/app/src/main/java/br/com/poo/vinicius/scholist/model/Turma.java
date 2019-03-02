@@ -11,6 +11,7 @@ public class Turma implements Parcelable {
     String profileUrl;
     String uuid;
     String uuidAdmin;
+    Post post;
     User users[];
 
     public User getUser() {
