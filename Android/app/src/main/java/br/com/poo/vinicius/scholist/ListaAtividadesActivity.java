@@ -155,7 +155,7 @@ public class ListaAtividadesActivity extends AppCompatActivity {
             final ImageView image = viewHolder.itemView.findViewById(R.id.imagePostUser);
             TextView descricao = viewHolder.itemView.findViewById(R.id.descriptionPost);
 
-            descricao.setText("Testes");
+            descricao.setText(post.getDescricao());
 
             FirebaseFirestore.getInstance().collection("users").document(turma.getUuidAdmin())
                     .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
