@@ -23,6 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -152,21 +153,24 @@ public class ListaAtividadesActivity extends AppCompatActivity {
 
         @Override
         public void bind(@NonNull ViewHolder viewHolder, int position) {
-            final ImageView image = viewHolder.itemView.findViewById(R.id.imagePostUser);
+            final ImageView imagePost = viewHolder.itemView.findViewById(R.id.imagePostsUser);
             TextView descricao = viewHolder.itemView.findViewById(R.id.descriptionPost);
+
+           FirebaseFirestore.getInstance().collection("/users").document(turma.getUuidAdmin())
+                   .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+               @Override
+               public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    User user = documentSnapshot.toObject(User.class);
+                    Picasso.get().load(user.getProfileUrl()).into(imagePost);
+
+               }
+           });
 
             descricao.setText(post.getDescricao());
 
-            FirebaseFirestore.getInstance().collection("users").document(turma.getUuidAdmin())
-                    .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    User user = documentSnapshot.toObject(User.class);
 
-                    Picasso.get().load(user.getProfileUrl()).into(image);
 
-                }
-            });
+
 
         }
         @Override
