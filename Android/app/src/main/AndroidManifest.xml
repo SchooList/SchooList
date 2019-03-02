@@ -11,6 +11,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -19,9 +20,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SearchTurmasActivity"></activity>
+        <activity android:name=".MapaActivity"></activity>
+        <activity android:name=".SearchTurmasActivity" />
         <activity android:name=".FormularioTurmaActivity" />
-        <activity android:name=".TurmasActivity"></activity>
+        <activity android:name=".TurmasActivity" />
         <activity android:name=".ListaAlunosActivity" />
         <activity android:name=".FormularioActivity" />
 
@@ -65,9 +67,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ProfileActivity" />

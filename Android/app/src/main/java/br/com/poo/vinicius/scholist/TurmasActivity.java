@@ -53,12 +53,9 @@ public class TurmasActivity extends AppCompatActivity {
 
         verifyAuthentication();
 
-
         adapter = new GroupAdapter<>();
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
-
-
 
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -99,11 +96,7 @@ public class TurmasActivity extends AppCompatActivity {
                 Intent searchTurma = new Intent(TurmasActivity.this, SearchTurmasActivity.class);
                 startActivity(searchTurma);
                 break;
-
-
         }
-
-
 
         return super.onOptionsItemSelected(item);
     }
@@ -123,11 +116,7 @@ public class TurmasActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
     }
-
-
 
     private void verifyAuthentication() {
         if(FirebaseAuth.getInstance().getUid() == null) {
@@ -139,6 +128,7 @@ public class TurmasActivity extends AppCompatActivity {
         }
 
     }
+
     private void fetchTurmas() {
         FirebaseFirestore.getInstance().collection("/turmas")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -156,8 +146,6 @@ public class TurmasActivity extends AppCompatActivity {
                         
                     }
                 });
-
-
     }
 
     private class TurmaItem extends Item<ViewHolder> {
@@ -185,11 +173,3 @@ public class TurmasActivity extends AppCompatActivity {
         }
     }
 }
-
-
-
-
-
-
-
-
