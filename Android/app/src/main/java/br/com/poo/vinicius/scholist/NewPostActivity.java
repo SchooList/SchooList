@@ -15,6 +15,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import br.com.poo.vinicius.scholist.model.Post;
 import br.com.poo.vinicius.scholist.model.Turma;
 import br.com.poo.vinicius.scholist.model.User;
@@ -67,7 +71,7 @@ public class NewPostActivity extends AppCompatActivity {
 
     private void createNewPost() {
         String descricao = txtPost.getText().toString();
-        String timestamp = "02/03/2019";
+        String timestamp = new SimpleDateFormat("dd/MM/yyyy").format(new Date(System.currentTimeMillis()));
 
         Post post = new Post(descricao,timestamp);
 
