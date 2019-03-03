@@ -83,17 +83,11 @@ public class ListaAtividadesActivity extends AppCompatActivity {
                     startActivity(intentToNewPost);
                 }
             });
-
              adapter = new GroupAdapter();
              rv.setAdapter(adapter);
              rv.setLayoutManager(new LinearLayoutManager(this));
-
-
-
              fetchPosts();
-
     }
-
     private void fetchPosts() {
         FirebaseFirestore.getInstance().collection("/turmas").document(turma.getUuid()).collection("/posts")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -108,15 +102,9 @@ public class ListaAtividadesActivity extends AppCompatActivity {
                             Post post = doc.toObject(Post.class);
                             adapter.add(new PostItem(post));
                         }
-
                     }
                 });
-
-
-
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_lista_alunos, menu);
@@ -155,29 +143,24 @@ public class ListaAtividadesActivity extends AppCompatActivity {
         public void bind(@NonNull ViewHolder viewHolder, int position) {
             final ImageView imagePost = viewHolder.itemView.findViewById(R.id.imagePostsUser);
             TextView descricao = viewHolder.itemView.findViewById(R.id.descriptionPost);
+            TextView timeStamp = viewHolder.itemView.findViewById(R.id.txtTimeStamp);
+            final TextView nomeProfessor = viewHolder.itemView.findViewById(R.id.txtName);
 
            FirebaseFirestore.getInstance().collection("/users").document(turma.getUuidAdmin())
                    .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                @Override
                public void onSuccess(DocumentSnapshot documentSnapshot) {
                     User user = documentSnapshot.toObject(User.class);
+                    nomeProfessor.setText(user.getUsername());
                     Picasso.get().load(user.getProfileUrl()).into(imagePost);
-
                }
            });
-
+            timeStamp.setText(post.getTimestamp());
             descricao.setText(post.getDescricao());
-
-
-
-
-
         }
         @Override
         public int getLayout() {
             return R.layout.item_posts;
         }
     }
-
-
 }
