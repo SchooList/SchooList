@@ -72,12 +72,7 @@ public class NewPostActivity extends AppCompatActivity {
     private void createNewPost() {
         String descricao = txtPost.getText().toString();
         String timestamp = new SimpleDateFormat("dd/MM/yyyy").format(new Date(System.currentTimeMillis()));
-
         Post post = new Post(descricao,timestamp);
-
-
-
-
         FirebaseFirestore.getInstance().collection("/turmas")
                 .document(turma.getUuid()).collection("/posts").add(post).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override

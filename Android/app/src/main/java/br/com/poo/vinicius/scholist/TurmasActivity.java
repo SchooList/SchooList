@@ -3,6 +3,7 @@ package br.com.poo.vinicius.scholist;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,6 +55,13 @@ public class TurmasActivity extends AppCompatActivity {
         btnNovaTurma = findViewById(R.id.nova_turma);
 
         verifyAuthentication();
+        if(isOnline() == false) {
+            Intent backtoLogin = new Intent(TurmasActivity.this, LoginActivity.class);
+            backtoLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            finish();
+            startActivity(backtoLogin);
+
+        }
 
 
         adapter = new GroupAdapter<>();
@@ -121,6 +129,13 @@ public class TurmasActivity extends AppCompatActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     void verifyTypeUser() {
