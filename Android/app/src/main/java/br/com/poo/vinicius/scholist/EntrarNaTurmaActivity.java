@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,22 +57,16 @@ public class EntrarNaTurmaActivity extends AppCompatActivity {
         String userId = FirebaseAuth.getInstance().getUid();
         final String idTurma = turma.getUuid().toString();
 
-        FirebaseFirestore.getInstance().collection("/users").document(userId).get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        User user = documentSnapshot.toObject(User.class);
 
-                        FirebaseFirestore.getInstance().collection("/turmas").document(idTurma).collection("users")
-                                .add(user)
-                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                    @Override
-                                    public void onSuccess(DocumentReference documentReference) {
-                                        Intent intent = new Intent(EntrarNaTurmaActivity.this, TurmasActivity.class);
-                                        startActivity(intent);
-                                    }
-                                });
-                    }
-                });
+        FirebaseFirestore.getInstance().collection("/users").document(userId).collection("turmas")
+                .document().set(turma).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(EntrarNaTurmaActivity.this, "Deu certo entrar", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+
     }
 }

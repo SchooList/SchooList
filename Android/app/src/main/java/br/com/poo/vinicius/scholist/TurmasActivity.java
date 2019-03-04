@@ -168,22 +168,25 @@ public class TurmasActivity extends AppCompatActivity {
 
     }
     private void fetchTurmas() {
-        FirebaseFirestore.getInstance().collection("/turmas")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                        if(e != null) {
-                            Log.e("Teste", e.getMessage());
-                            return;
-                        }
-                        List<DocumentSnapshot> docs = queryDocumentSnapshots.getDocuments();
-                        for (DocumentSnapshot doc: docs) {
-                            Turma turma = doc.toObject(Turma.class);
-                            adapter.add(new TurmaItem(turma));
-                        }
-                        
-                    }
-                });
+        String userId = FirebaseAuth.getInstance().getUid();
+        FirebaseFirestore.getInstance().collection("/users").document(userId)
+                .collection("turmas").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                if(e != null) {
+                    Log.e("Teste", e.getMessage());
+                    return;
+                }
+                List<DocumentSnapshot> docs = queryDocumentSnapshots.getDocuments();
+                for (DocumentSnapshot doc: docs) {
+                    Turma turma = doc.toObject(Turma.class);
+                    adapter.add(new TurmaItem(turma));
+                }
+            }
+        });
+
+
+
 
 
     }
