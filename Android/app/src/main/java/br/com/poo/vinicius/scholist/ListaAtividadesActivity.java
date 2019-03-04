@@ -34,6 +34,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
 import com.xwray.groupie.Item;
+import com.xwray.groupie.OnItemLongClickListener;
 import com.xwray.groupie.ViewHolder;
 
 import java.util.List;
@@ -70,16 +71,12 @@ public class ListaAtividadesActivity extends AppCompatActivity {
             if(userId.equals(adminUid)) { } else {
                 novoComentario.setAlpha(0);
                 novoComentario.setEnabled(false); }
-
-
-
-
+                
             novoComentario.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intentToNewPost = new Intent(ListaAtividadesActivity.this, NewPostActivity.class);
                     intentToNewPost.putExtra("turma", turma);
-
                     startActivity(intentToNewPost);
                 }
             });
@@ -139,16 +136,12 @@ public class ListaAtividadesActivity extends AppCompatActivity {
 
         private PostItem(Post post) {this.post = post;}
 
-
-
-
         @Override
         public void bind(@NonNull ViewHolder viewHolder, int position) {
             final ImageView imagePost = viewHolder.itemView.findViewById(R.id.imagePostsUser);
             TextView descricao = viewHolder.itemView.findViewById(R.id.descriptionPost);
             TextView timeStamp = viewHolder.itemView.findViewById(R.id.txtTimeStamp);
             final TextView nomeProfessor = viewHolder.itemView.findViewById(R.id.txtName);
-
            FirebaseFirestore.getInstance().collection("/users").document(turma.getUuidAdmin())
                    .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                @Override
