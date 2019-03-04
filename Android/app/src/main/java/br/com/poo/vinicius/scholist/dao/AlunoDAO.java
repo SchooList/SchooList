@@ -26,7 +26,6 @@ public class AlunoDAO extends SQLiteOpenHelper implements GlobalDAO{
         }
         return uniqueInstance;
     }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE Alunos (id INTEGER PRIMARY KEY, " +
@@ -50,10 +49,13 @@ public class AlunoDAO extends SQLiteOpenHelper implements GlobalDAO{
     }
 
     public void insere(Object object) {
-        Aluno aluno = (Aluno)object;
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues dados = getContentValuesAluno(aluno);
-        db.insert("Alunos",null, dados);
+        if(object instanceof Aluno) {
+            Aluno aluno = (Aluno) object;
+            SQLiteDatabase db = getWritableDatabase();
+            ContentValues dados = getContentValuesAluno(aluno);
+            db.insert("Alunos",null, dados);
+        }
+
     }
 
     @NonNull
@@ -92,20 +94,26 @@ public class AlunoDAO extends SQLiteOpenHelper implements GlobalDAO{
     }
 
     public void delete(Object object) {
-        Aluno aluno = (Aluno)object;
-        SQLiteDatabase db = getWritableDatabase();
-        String[] params = {aluno.getId().toString()};
-        db.delete("Alunos", "id = ?", params);
+        if(object instanceof Aluno) {
+            Aluno aluno = (Aluno) object;
+            SQLiteDatabase db = getWritableDatabase();
+            String[] params = {aluno.getId().toString()};
+            db.delete("Alunos", "id = ?", params);
+        }
 
 
     }
 
     public void update(Object object) {
-        Aluno aluno = (Aluno)object;
+        if(object instanceof Aluno) {
+            Aluno aluno = (Aluno)object;
             SQLiteDatabase db = getWritableDatabase();
             ContentValues dados = getContentValuesAluno(aluno);
             String[] params = {aluno.getId().toString()};
             db.update("Alunos", dados, "id = ?", params);
+        }
+
+
     }
 
     public boolean verifyStudent(String telefone) {
