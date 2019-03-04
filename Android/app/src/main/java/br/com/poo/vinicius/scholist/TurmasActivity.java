@@ -184,11 +184,6 @@ public class TurmasActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
-
     }
 
     private class TurmaItem extends Item<ViewHolder> {

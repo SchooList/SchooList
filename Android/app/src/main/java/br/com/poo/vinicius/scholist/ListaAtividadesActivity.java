@@ -71,7 +71,7 @@ public class ListaAtividadesActivity extends AppCompatActivity {
             if(userId.equals(adminUid)) { } else {
                 novoComentario.setAlpha(0);
                 novoComentario.setEnabled(false); }
-                
+
             novoComentario.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

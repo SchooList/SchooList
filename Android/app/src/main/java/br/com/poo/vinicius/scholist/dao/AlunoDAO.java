@@ -13,7 +13,7 @@ import java.util.List;
 
 import br.com.poo.vinicius.scholist.model.Aluno;
 
-public class AlunoDAO extends SQLiteOpenHelper {
+public class AlunoDAO extends SQLiteOpenHelper implements GlobalDAO{
 
     private static AlunoDAO uniqueInstance;
 
@@ -49,7 +49,8 @@ public class AlunoDAO extends SQLiteOpenHelper {
         }
     }
 
-    public void insere(Aluno aluno) {
+    public void insere(Object object) {
+        Aluno aluno = (Aluno)object;
         SQLiteDatabase db = getWritableDatabase();
         ContentValues dados = getContentValuesAluno(aluno);
         db.insert("Alunos",null, dados);
@@ -90,7 +91,8 @@ public class AlunoDAO extends SQLiteOpenHelper {
         return alunos;
     }
 
-    public void delete(Aluno aluno) {
+    public void delete(Object object) {
+        Aluno aluno = (Aluno)object;
         SQLiteDatabase db = getWritableDatabase();
         String[] params = {aluno.getId().toString()};
         db.delete("Alunos", "id = ?", params);
@@ -98,7 +100,8 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
     }
 
-    public void update(Aluno aluno) {
+    public void update(Object object) {
+        Aluno aluno = (Aluno)object;
             SQLiteDatabase db = getWritableDatabase();
             ContentValues dados = getContentValuesAluno(aluno);
             String[] params = {aluno.getId().toString()};
