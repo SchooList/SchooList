@@ -134,10 +134,13 @@ public class ListaAtividadesActivity extends AppCompatActivity {
     }
 
 
-    private class PostItem extends Item<ViewHolder> {
+    private class PostItem extends Item<ViewHolder>  {
         private final Post post;
 
         private PostItem(Post post) {this.post = post;}
+
+
+
 
         @Override
         public void bind(@NonNull ViewHolder viewHolder, int position) {
