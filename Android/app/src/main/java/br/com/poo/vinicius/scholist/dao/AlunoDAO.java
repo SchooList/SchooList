@@ -89,10 +89,8 @@ public class AlunoDAO extends SQLiteOpenHelper implements GlobalDAO{
             alunos.add(aluno);
         }
         c.close();
-
         return alunos;
     }
-
     public void delete(Object object) {
         if(object instanceof Aluno) {
             Aluno aluno = (Aluno) object;
@@ -100,10 +98,7 @@ public class AlunoDAO extends SQLiteOpenHelper implements GlobalDAO{
             String[] params = {aluno.getId().toString()};
             db.delete("Alunos", "id = ?", params);
         }
-
-
     }
-
     public void update(Object object) {
         if(object instanceof Aluno) {
             Aluno aluno = (Aluno)object;
@@ -112,8 +107,6 @@ public class AlunoDAO extends SQLiteOpenHelper implements GlobalDAO{
             String[] params = {aluno.getId().toString()};
             db.update("Alunos", dados, "id = ?", params);
         }
-
-
     }
 
     public boolean verifyStudent(String telefone) {

@@ -20,7 +20,6 @@
        android:layout_marginRight="16dp"
        android:background="@drawable/fundo"
        android:stateListAnimator="@null"/>
-
    <android.support.v7.widget.RecyclerView
        android:id="@+id/listaPosts"
        android:layout_width="match_parent"

@@ -61,13 +61,10 @@ public class ListaAtividadesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_atividades);
             novoComentario = findViewById(R.id.nova_atividade);
             rv = findViewById(R.id.listaPosts);
-
             final Intent intent = getIntent();
             turma = (Turma) intent.getParcelableExtra("turma");
             final String adminUid = turma.getUuidAdmin().toString();
             final String userId = FirebaseAuth.getInstance().getUid().toString();
-
-
             if(userId.equals(adminUid)) { } else {
                 novoComentario.setAlpha(0);
                 novoComentario.setEnabled(false); }
@@ -129,13 +126,9 @@ public class ListaAtividadesActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
     private class PostItem extends Item<ViewHolder>  {
         private final Post post;
-
         private PostItem(Post post) {this.post = post;}
-
         @Override
         public void bind(@NonNull ViewHolder viewHolder, int position) {
             final ImageView imagePost = viewHolder.itemView.findViewById(R.id.imagePostsUser);

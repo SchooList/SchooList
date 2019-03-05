@@ -57,12 +57,15 @@ public class EntrarNaTurmaActivity extends AppCompatActivity {
         String userId = FirebaseAuth.getInstance().getUid();
         final String idTurma = turma.getUuid().toString();
 
-
+        Intent intentBackToList = new Intent(EntrarNaTurmaActivity.this, TurmasActivity.class);
+        startActivity(intentBackToList);
         FirebaseFirestore.getInstance().collection("/users").document(userId).collection("turmas")
                 .document().set(turma).addOnSuccessListener(new OnSuccessListener<Void>() {
+
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(EntrarNaTurmaActivity.this, "Deu certo entrar", Toast.LENGTH_LONG).show();
+                Toast.makeText(EntrarNaTurmaActivity.this, "Você entrou em " + turma.getNome(), Toast.LENGTH_LONG).show();
+                finish();
             }
         });
 
