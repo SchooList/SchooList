@@ -113,6 +113,7 @@ public class ListaAtividadesActivity extends AppCompatActivity {
                 break;
             case R.id.menu_baixar_provas:
                 Intent intentGoToProof = new Intent(ListaAtividadesActivity.this, ProvasActivity.class);
+                intentGoToProof.putExtra("turma", turma);
                 startActivity(intentGoToProof);
                 break;
             case R.id.menu_mapa:
