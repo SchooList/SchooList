@@ -16,6 +16,13 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/menuApagarTurma"
+        android:icon="@drawable/ic_apagar"
+        android:orderInCategory="100"
+        android:title="Apagar turma"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/menu_baixar_provas"
         android:title="Baixar Provas"
         android:icon="@drawable/ic_receber"

@@ -7,9 +7,11 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.Browser;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +27,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.net.HttpURLConnection;
 import java.util.List;
@@ -117,6 +122,8 @@ public class ListaAlunosActivity extends AppCompatActivity {
             case R.id.menuVerPerfil:
                 Intent goToProfile = new Intent(ListaAlunosActivity.this, ProfileActivity.class);
                 startActivity(goToProfile);
+                break;
+            case R.id.menuApagarTurma:
                 break;
         }
         return super.onOptionsItemSelected(item);
