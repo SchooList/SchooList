@@ -121,7 +121,8 @@ public class ListaAtividadesActivity extends AppCompatActivity {
                 startActivity(vaiParaMapa);
                 break;
             case R.id.menuVerPerfil:
-                Intent goToProfile = new Intent(ListaAtividadesActivity.this, ProfileActivity.class);
+                Intent goToProfile = new Intent(ListaAtividadesActivity.this, ConfiguracoesTurmaActivity.class);
+                goToProfile.putExtra("turma", turma);
                 startActivity(goToProfile);
                 break;
         }

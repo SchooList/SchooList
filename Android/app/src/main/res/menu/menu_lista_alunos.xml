@@ -12,7 +12,7 @@
         android:id="@+id/menuVerPerfil"
         android:icon="@drawable/ic_enviar"
         android:orderInCategory="100"
-        android:title="Perfil"
+        android:title="Configurações turma"
         app:showAsAction="never" />
 
     <item

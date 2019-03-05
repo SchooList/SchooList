@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NewPostActivity"></activity>
+        <activity android:name=".ConfiguracoesTurmaActivity"></activity>
+        <activity android:name=".NewPostActivity" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".EntrarNaTurmaActivity" />
         <activity android:name=".SearchTurmasActivity" />
