@@ -116,7 +116,6 @@ public class ChatActivity extends AppCompatActivity {
 
         Message message = new Message();
         message.setFromId(fromId);
-        message.setToId("");
         message.setTimeStamp(timeStamp);
         message.setText(text);
 
