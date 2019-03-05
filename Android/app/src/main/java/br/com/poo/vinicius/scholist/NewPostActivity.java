@@ -40,7 +40,8 @@ public class NewPostActivity extends AppCompatActivity {
         Intent intent = getIntent();
         turma = (Turma) intent.getParcelableExtra("turma");
 
-        FirebaseFirestore.getInstance().collection("/users").document(turma.getUuidAdmin().toString())
+        adminUid = turma.getUuidAdmin().toString();
+        FirebaseFirestore.getInstance().collection("/users").document(adminUid)
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -50,9 +51,7 @@ public class NewPostActivity extends AppCompatActivity {
         });
 
 
-
     }
-
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_profile, menu);
@@ -71,14 +70,16 @@ public class NewPostActivity extends AppCompatActivity {
 
     private void createNewPost() {
         String descricao = txtPost.getText().toString();
-        String timestamp = new SimpleDateFormat("dd/MM/yyyy").format(new Date(System.currentTimeMillis()));
+        String timestamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(System.currentTimeMillis()));
         Post post = new Post(descricao,timestamp);
 
         FirebaseFirestore.getInstance().collection("/turmas")
                 .document(turma.getUuid()).collection("/posts").add(post).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-
+                Toast.makeText(NewPostActivity.this, "Post criado com sucesso!", Toast.LENGTH_LONG).show();
+                txtPost.setText("");
+                txtPost.setHint("Compartilhe novamente com sua turma!");
             }
         });
 

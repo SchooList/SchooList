@@ -83,7 +83,7 @@ public class ListaAtividadesActivity extends AppCompatActivity {
              fetchPosts();
     }
     private void fetchPosts() {
-        FirebaseFirestore.getInstance().collection("/turmas").document(turma.getUuid()).collection("/posts")
+        FirebaseFirestore.getInstance().collection("/turmas").document(turma.getUuid()).collection("/posts").orderBy("timestamp")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
