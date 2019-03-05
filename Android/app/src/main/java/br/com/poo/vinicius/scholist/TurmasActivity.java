@@ -76,10 +76,7 @@ public class TurmasActivity extends AppCompatActivity {
              TurmaItem turmaItem = (TurmaItem)item;
              intent.putExtra("turma",turmaItem.turma);
              startActivity(intent);
-
-
-
-               return false;
+             return false;
            }
        });
 

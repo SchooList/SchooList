@@ -43,9 +43,9 @@ public class ChatActivity extends AppCompatActivity {
 
     private GroupAdapter adapter;
     private EditText editChat;
-    User me;
-    Message conversas;
-    Turma turma;
+    private User me;
+    private Message conversas;
+    private Turma turma;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +101,6 @@ public class ChatActivity extends AppCompatActivity {
                                         }
                                     }
                                 }
-
                         }
                     });
         }
@@ -136,10 +135,7 @@ public class ChatActivity extends AppCompatActivity {
             });
 
         }
-
-
     }
-
 
     private class MessageItem extends Item<ViewHolder> {
 
@@ -153,15 +149,15 @@ public class ChatActivity extends AppCompatActivity {
             final ImageView imgMessage = viewHolder.itemView.findViewById(R.id.img_message_user);
             txtMsg.setText(message.getText());
 
-            FirebaseFirestore.getInstance().collection("/turmas").document(turma.getUuid()).collection("/conversas")
-                    .document().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            FirebaseFirestore.getInstance().collection("/turmas").document(turma.getUuid())
+                    .collection("/conversas").document().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     conversas = documentSnapshot.toObject(Message.class);
                 }
             });
 
-            FirebaseFirestore.getInstance().collection("/users").document("7ip1aLsUkNZaCpqzUEpFYcf9dnt1")
+            FirebaseFirestore.getInstance().collection("/users").document("jmxmNp1cMbP4yg4U01IOGSUHzh12")
                     .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
