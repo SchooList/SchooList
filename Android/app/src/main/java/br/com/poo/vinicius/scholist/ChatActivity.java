@@ -162,10 +162,9 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     User user = documentSnapshot.toObject(User.class);
-                    Picasso.get().load(user.getProfileUrl().toString()).into(imgMessage);
+                    Picasso.get().load(message.getFromId().equals(FirebaseAuth.getInstance().getUid()) ? me.getProfileUrl() : user.getProfileUrl()).into(imgMessage);
                 }
             });
-
         }
 
         @Override
