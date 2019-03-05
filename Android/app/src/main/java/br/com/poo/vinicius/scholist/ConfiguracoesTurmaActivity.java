@@ -58,8 +58,13 @@ public class ConfiguracoesTurmaActivity extends AppCompatActivity {
         txtDescricaoTurma.setText(turma.getDescricao());
         Picasso.get().load(turma.getProfileUrl()).into(imgTurma);
 
-        if(FirebaseAuth.getInstance().getUid().equals(turma.getUuidAdmin())) {
+        if(isAdmin()) {
             btnSair.setText("Deletar turma");
+        } else {
+            txtNomeTurma.setEnabled(false);
+            txtDescricaoTurma.setEnabled(false);
+            btnSelectedPhoto.setAlpha(0);
+            btnSelectedPhoto.setEnabled(false);
         }
 
 
@@ -73,13 +78,21 @@ public class ConfiguracoesTurmaActivity extends AppCompatActivity {
         btnSair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(FirebaseAuth.getInstance().getUid().equals(turma.getUuidAdmin())) {
+                if(isAdmin()) {
                     deletarTurma();
                 } else {
                     sairDaTurma();
                 }
             }
         });
+    }
+
+    private Boolean isAdmin() {
+        if(FirebaseAuth.getInstance().getUid().equals(turma.getUuidAdmin())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void selectPhoto() {
@@ -90,8 +103,7 @@ public class ConfiguracoesTurmaActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-            getMenuInflater().inflate(R.menu.menu_profile, menu);
+            if(isAdmin()) { getMenuInflater().inflate(R.menu.menu_profile, menu); }
 
 
         return super.onCreateOptionsMenu(menu);

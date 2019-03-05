@@ -50,7 +50,7 @@ public class FormularioTurmaActivity extends AppCompatActivity {
         btnNovaTurma = findViewById(R.id.formulario_nova_turma);
         editDescricao = findViewById(R.id.formulario_turma_descricao);
         editNome = findViewById(R.id.formulario_turma_nome);
-        btnSelectedPhoto = findViewById(R.id.btn_selected_photo);
+        btnSelectedPhoto = findViewById(R.id.formulario_turma_botao_foto);
         imagePhoto = findViewById(R.id.formulario_turma_imageView);
         btnNovaTurma.setOnClickListener(new View.OnClickListener() {
             @Override

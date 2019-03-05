@@ -73,13 +73,15 @@ public class NewPostActivity extends AppCompatActivity {
         String descricao = txtPost.getText().toString();
         String timestamp = new SimpleDateFormat("dd/MM/yyyy").format(new Date(System.currentTimeMillis()));
         Post post = new Post(descricao,timestamp);
+
         FirebaseFirestore.getInstance().collection("/turmas")
                 .document(turma.getUuid()).collection("/posts").add(post).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-                Toast.makeText(NewPostActivity.this, "Deu certo cara", Toast.LENGTH_LONG).show();
+
             }
         });
+
     }
 
 

@@ -8,6 +8,26 @@
 
 
     <Button
+        android:id="@+id/formulario_turma_botao_foto"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/fundo_cam"
+        app:layout_constraintBottom_toTopOf="@+id/formulario_turma_nome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
         android:id="@+id/btn_selected_photo"
         android:layout_width="423dp"
         android:layout_height="94dp"
@@ -20,14 +40,14 @@
     <ImageView
         android:id="@+id/formulario_turma_imageView"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="171dp"
         android:scaleType="centerCrop"
+        android:src="@drawable/background_turmas"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        android:src="@drawable/background_turmas" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <View
         android:id="@+id/turma_divisor"
@@ -44,7 +64,7 @@
         android:id="@+id/formulario_turma_nome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:hint="Nome da Turma:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
