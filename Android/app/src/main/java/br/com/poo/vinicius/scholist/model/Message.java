@@ -1,10 +1,33 @@
 package br.com.poo.vinicius.scholist.model;
 
-public class Message {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Message implements Parcelable {
     private String text;
     private long timeStamp;
     private String fromId;
-    private String toId;
+    private String id;
+
+    public Message() {}
+
+    protected Message(Parcel in) {
+        text = in.readString();
+        timeStamp = in.readLong();
+        fromId = in.readString();
+    }
+
+    public static final Creator<Message> CREATOR = new Creator<Message>() {
+        @Override
+        public Message createFromParcel(Parcel in) {
+            return new Message(in);
+        }
+
+        @Override
+        public Message[] newArray(int size) {
+            return new Message[size];
+        }
+    };
 
     public String getText() {
         return text;
@@ -30,11 +53,24 @@ public class Message {
         this.fromId = fromId;
     }
 
-    public String getToId() {
-        return toId;
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setToId(String toId) {
-        this.toId = toId;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(fromId);
+        dest.writeLong(timeStamp);
+        dest.writeString(text);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

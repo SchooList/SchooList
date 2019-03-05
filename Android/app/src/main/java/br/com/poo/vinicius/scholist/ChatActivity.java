@@ -1,6 +1,7 @@
 package br.com.poo.vinicius.scholist;
 
 import br.com.poo.vinicius.scholist.model.Message;
+import br.com.poo.vinicius.scholist.model.Post;
 import br.com.poo.vinicius.scholist.model.Turma;
 import br.com.poo.vinicius.scholist.model.User;
 
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,6 +38,7 @@ import com.xwray.groupie.ViewHolder;
 import org.w3c.dom.Text;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Nullable;
 
@@ -114,27 +117,27 @@ public class ChatActivity extends AppCompatActivity {
         String fromId = FirebaseAuth.getInstance().getUid();
         long timeStamp = System.currentTimeMillis();
 
+
+        String idMessage = String.valueOf(UUID.randomUUID());
+
         Message message = new Message();
         message.setFromId(fromId);
         message.setTimeStamp(timeStamp);
         message.setText(text);
+        message.setId(idMessage);
 
         if(!message.getText().isEmpty()) {
             FirebaseFirestore.getInstance().collection("/turmas").document(turma.getUuid())
-                    .collection("conversas").add(message).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    .collection("conversas").document(idMessage).set(message).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
-                public void onSuccess(DocumentReference documentReference) {
-                    Log.d("Deu certo", documentReference.getId());
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.d("Deu errado", e.getMessage(), e);
+                public void onSuccess(Void aVoid) {
+
                 }
             });
 
         }
     }
+
 
     private class MessageItem extends Item<ViewHolder> {
 
@@ -149,7 +152,7 @@ public class ChatActivity extends AppCompatActivity {
             txtMsg.setText(message.getText());
 
             FirebaseFirestore.getInstance().collection("/turmas").document(turma.getUuid())
-                    .collection("/conversas").document().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    .collection("conversas").document("75a755aa-19fd-4c9d-9bcf-9371483e3e64").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     conversas = documentSnapshot.toObject(Message.class);
