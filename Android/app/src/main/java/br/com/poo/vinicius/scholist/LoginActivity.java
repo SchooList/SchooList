@@ -46,11 +46,14 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.i("Sucesso", task.getResult().getUser().getUid());
-                        Intent intent = new Intent(LoginActivity.this, TurmasActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
+                        if(task.isSuccessful()) {
+                            Log.i("Sucesso", task.getResult().getUser().getUid());
+                            Intent intent = new Intent(LoginActivity.this, TurmasActivity.class);
+                            startActivity(intent);
+                            finish();
+
+                        }
+                                           }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
