@@ -47,7 +47,6 @@ public class ChatActivity extends AppCompatActivity {
     private GroupAdapter adapter;
     private EditText editChat;
     private User me;
-    private Message conversas;
     private Turma turma;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +58,7 @@ public class ChatActivity extends AppCompatActivity {
         editChat = findViewById(R.id.edit_chat);
 
         Intent intentTurma = getIntent();
-         turma =  (Turma) intentTurma.getParcelableExtra("turma");
+        turma =  (Turma) intentTurma.getParcelableExtra("turma");
 
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +77,6 @@ public class ChatActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 me = documentSnapshot.toObject(User.class);
                 fetchMessages();
-
             }
         });
 
@@ -130,9 +128,7 @@ public class ChatActivity extends AppCompatActivity {
             FirebaseFirestore.getInstance().collection("/turmas").document(turma.getUuid())
                     .collection("conversas").document(idMessage).set(message).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
-                public void onSuccess(Void aVoid) {
-
-                }
+                public void onSuccess(Void aVoid) { }
             });
 
         }
@@ -142,6 +138,7 @@ public class ChatActivity extends AppCompatActivity {
     private class MessageItem extends Item<ViewHolder> {
 
         private final Message message;
+        private Message conversas;
 
         private MessageItem(Message message) {this.message = message;}
 
@@ -151,22 +148,39 @@ public class ChatActivity extends AppCompatActivity {
             final ImageView imgMessage = viewHolder.itemView.findViewById(R.id.img_message_user);
             txtMsg.setText(message.getText());
 
-            FirebaseFirestore.getInstance().collection("/turmas").document(turma.getUuid())
-                    .collection("conversas").document("75a755aa-19fd-4c9d-9bcf-9371483e3e64").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    conversas = documentSnapshot.toObject(Message.class);
-                }
-            });
 
-            FirebaseFirestore.getInstance().collection("/users").document("jmxmNp1cMbP4yg4U01IOGSUHzh12")
-                    .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    User user = documentSnapshot.toObject(User.class);
-                    Picasso.get().load(message.getFromId().equals(FirebaseAuth.getInstance().getUid()) ? me.getProfileUrl() : user.getProfileUrl()).into(imgMessage);
-                }
-            });
+            FirebaseFirestore.getInstance().collection("/turmas").document(turma.getUuid())
+                    .collection("conversas").orderBy("timeStamp", Query.Direction.ASCENDING)
+                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        @Override
+                        public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                            List<DocumentChange> documentChanges = queryDocumentSnapshots.getDocumentChanges();
+                            if(documentChanges != null) {
+                                for (DocumentChange doc: documentChanges) {
+                                    if(doc.getType() == DocumentChange.Type.ADDED) {
+                                        Message message1 = doc.getDocument().toObject(Message.class);
+
+
+
+                                        FirebaseFirestore.getInstance().collection("/users").document(message1.getFromId())
+                                                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                User user = documentSnapshot.toObject(User.class);
+                                                Picasso.get().load(message.getFromId().equals(FirebaseAuth.getInstance().getUid()) ? me.getProfileUrl() : user.getProfileUrl()).into(imgMessage);
+                                            }
+                                        });
+
+
+
+
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+
         }
 
         @Override
