@@ -1,6 +1,7 @@
 package br.com.poo.vinicius.scholist;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,8 +17,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,6 +36,7 @@ public class NewPostActivity extends AppCompatActivity {
     EditText  txtPost;
     String adminUid;
     Turma turma;
+    Uri mSelectedUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +80,7 @@ public class NewPostActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == 1){
-            //A fazer
+            mSelectedUri = data.getData();
         }
     }
 
