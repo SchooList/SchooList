@@ -147,21 +147,20 @@ public class ChatActivity extends AppCompatActivity {
             TextView txtMsg = viewHolder.itemView.findViewById(R.id.txt_msg);
             final ImageView imgMessage = viewHolder.itemView.findViewById(R.id.img_message_user);
             txtMsg.setText(message.getText());
-
-
             FirebaseFirestore.getInstance().collection("/turmas").document(turma.getUuid())
                     .collection("conversas").orderBy("timeStamp", Query.Direction.ASCENDING)
                     .addSnapshotListener(new EventListener<QuerySnapshot>() {
                         @Override
                         public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+
+
+
+
                             List<DocumentChange> documentChanges = queryDocumentSnapshots.getDocumentChanges();
                             if(documentChanges != null) {
                                 for (DocumentChange doc: documentChanges) {
                                     if(doc.getType() == DocumentChange.Type.ADDED) {
                                         Message message1 = doc.getDocument().toObject(Message.class);
-
-
-
                                         FirebaseFirestore.getInstance().collection("/users").document(message1.getFromId())
                                                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                             @Override
@@ -170,10 +169,6 @@ public class ChatActivity extends AppCompatActivity {
                                                 Picasso.get().load(message.getFromId().equals(FirebaseAuth.getInstance().getUid()) ? me.getProfileUrl() : user.getProfileUrl()).into(imgMessage);
                                             }
                                         });
-
-
-
-
                                     }
                                 }
                             }

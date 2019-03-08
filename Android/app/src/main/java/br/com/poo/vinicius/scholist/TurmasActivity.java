@@ -55,7 +55,7 @@ public class TurmasActivity extends AppCompatActivity {
         btnNovaTurma = findViewById(R.id.nova_turma);
 
         verifyAuthentication();
-        if(isOnline() == false) {
+        if(isNetworkAvailable() == false) {
             Intent backtoLogin = new Intent(TurmasActivity.this, LoginActivity.class);
             backtoLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             finish();
@@ -128,12 +128,18 @@ public class TurmasActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public boolean isOnline() {
-        ConnectivityManager cm =
+    private boolean isNetworkAvailable() {
+        ConnectivityManager manager =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        boolean isAvailable = false;
+        if (networkInfo != null && networkInfo.isConnected()) {
+            // Network is present and connected
+            isAvailable = true;
+        }
+        return isAvailable;
     }
+
 
     void verifyTypeUser() {
         FirebaseFirestore.getInstance().collection("/users")
