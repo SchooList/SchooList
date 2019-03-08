@@ -1,10 +1,13 @@
 package br.com.poo.vinicius.scholist;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -24,7 +27,7 @@ import br.com.poo.vinicius.scholist.model.Turma;
 import br.com.poo.vinicius.scholist.model.User;
 
 public class NewPostActivity extends AppCompatActivity {
-
+    Button addFile;
     ImageView imageAdmin;
     EditText  txtPost;
     String adminUid;
@@ -35,7 +38,15 @@ public class NewPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_post);
         imageAdmin = findViewById(R.id.imageAdminTurma);
+        addFile = findViewById(R.id.btn_addFile);
         txtPost = findViewById(R.id.editShareWithUs);
+
+        addFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectFile();
+            }
+        });
 
         Intent intent = getIntent();
         turma = (Turma) intent.getParcelableExtra("turma");
@@ -51,6 +62,21 @@ public class NewPostActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void selectFile() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("application/pdf");
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 1){
+            //A fazer
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
