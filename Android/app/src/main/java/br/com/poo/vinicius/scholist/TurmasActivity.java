@@ -46,7 +46,6 @@ public class TurmasActivity extends AppCompatActivity {
     Button btnNovaTurma;
     RecyclerView rv;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,20 +53,16 @@ public class TurmasActivity extends AppCompatActivity {
         rv = findViewById(R.id.recycler);
         btnNovaTurma = findViewById(R.id.nova_turma);
 
-        verifyAuthentication();
         if(isNetworkAvailable() == false) {
             Intent backtoLogin = new Intent(TurmasActivity.this, LoginActivity.class);
             backtoLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             finish();
             startActivity(backtoLogin);
-
         }
-
-
+        verifyAuthentication();
         adapter = new GroupAdapter<>();
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
-
 
        adapter.setOnItemLongClickListener(new OnItemLongClickListener() {
            @Override
@@ -91,7 +86,6 @@ public class TurmasActivity extends AppCompatActivity {
         });
 
         fetchTurmas();
-
 
         btnNovaTurma.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,12 +113,7 @@ public class TurmasActivity extends AppCompatActivity {
                 Intent searchTurma = new Intent(TurmasActivity.this, SearchTurmasActivity.class);
                 startActivity(searchTurma);
                 break;
-
-
         }
-
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -156,10 +145,7 @@ public class TurmasActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
     }
-
     private void verifyAuthentication() {
         if(FirebaseAuth.getInstance().getUid() == null) {
             Intent backtoLogin = new Intent(TurmasActivity.this, LoginActivity.class);

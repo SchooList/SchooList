@@ -6,14 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
-import android.widget.Switch;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.poo.vinicius.scholist.model.Aluno;
 
-public class AlunoDAO extends SQLiteOpenHelper implements GlobalDAO{
+public class AlunoDAO extends SQLiteOpenHelper implements GlobalDAO<Aluno>{
 
     private static AlunoDAO uniqueInstance;
 
@@ -48,13 +47,11 @@ public class AlunoDAO extends SQLiteOpenHelper implements GlobalDAO{
         }
     }
 
-    public void insere(Object object) {
-        if(object instanceof Aluno) {
-            Aluno aluno = (Aluno) object;
+    public void insere(Aluno object) {
             SQLiteDatabase db = getWritableDatabase();
-            ContentValues dados = getContentValuesAluno(aluno);
+            ContentValues dados = getContentValuesAluno(object);
             db.insert("Alunos",null, dados);
-        }
+
 
     }
 
@@ -91,22 +88,17 @@ public class AlunoDAO extends SQLiteOpenHelper implements GlobalDAO{
         c.close();
         return alunos;
     }
-    public void delete(Object object) {
-        if(object instanceof Aluno) {
-            Aluno aluno = (Aluno) object;
+    public void delete(Aluno object) {
             SQLiteDatabase db = getWritableDatabase();
-            String[] params = {aluno.getId().toString()};
+            String[] params = {object.getId().toString()};
             db.delete("Alunos", "id = ?", params);
-        }
+
     }
-    public void update(Object object) {
-        if(object instanceof Aluno) {
-            Aluno aluno = (Aluno)object;
+    public void update(Aluno object) {
             SQLiteDatabase db = getWritableDatabase();
-            ContentValues dados = getContentValuesAluno(aluno);
-            String[] params = {aluno.getId().toString()};
+            ContentValues dados = getContentValuesAluno(object);
+            String[] params = {object.getId().toString()};
             db.update("Alunos", dados, "id = ?", params);
-        }
     }
 
     public boolean verifyStudent(String telefone) {

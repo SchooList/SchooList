@@ -135,6 +135,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
+
     private class MessageItem extends Item<ViewHolder> {
 
         private final Message message;

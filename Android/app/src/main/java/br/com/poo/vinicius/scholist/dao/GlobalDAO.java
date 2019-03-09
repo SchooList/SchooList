@@ -5,10 +5,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import br.com.poo.vinicius.scholist.model.Aluno;
 
-public interface GlobalDAO {
+public interface GlobalDAO<A> {
     public void onCreate(SQLiteDatabase db);
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion);
-    public void insere(Object object);
-    public void delete(Object object);
-    public void update(Object object);
+    public void insere(A object);
+    public void delete(A object);
+    public void update(A object);
 }
