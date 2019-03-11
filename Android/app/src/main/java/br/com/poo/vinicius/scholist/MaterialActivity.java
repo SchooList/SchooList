@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthProvider;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -26,6 +27,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.security.Permission;
+import java.util.UUID;
 
 import br.com.poo.vinicius.scholist.model.Turma;
 
@@ -90,24 +92,33 @@ public class MaterialActivity extends AppCompatActivity {
     }
 
     private void uploadFile() {
-        String fileName = System.currentTimeMillis()+"";
-        final StorageReference storageReference = storage.getReference();
+        String filename = UUID.randomUUID().toString();
+        final StorageReference ref = FirebaseStorage.getInstance().getReference("/images/" + filename);
 
-        storageReference.child("pdfs").child(fileName).putFile(uriPdf).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        ref.putFile(uriPdf).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                String url = storageReference.getDownloadUrl().toString();
+                ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        String materialUrl = uri.toString();
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
+                        Material material =  new Material(materialUrl);
 
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-
+                        CollectionReference doc = FirebaseFirestore.getInstance().collection(turma.getUuid());
+                        doc.document().set(material).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(MaterialActivity.this, "Deu certo ", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MaterialActivity.this, "Deu errado ", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
 
@@ -117,7 +128,7 @@ public class MaterialActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == 86 && resultCode == RESULT_OK && data != null) {
             uriPdf = data.getData();
-            Toast.makeText(this, uriPdf.toString(), Toast.LENGTH_LONG).show();
+            uploadFile();
         } else {
             Toast.makeText(MaterialActivity.this, "Selecione o pdf", Toast.LENGTH_SHORT).show();
         }
