@@ -1,6 +1,7 @@
 package br.com.poo.vinicius.scholist;
 
 import android.Manifest;
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -10,8 +11,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -20,13 +25,24 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthProvider;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.xwray.groupie.GroupAdapter;
+import com.xwray.groupie.Item;
+import com.xwray.groupie.OnItemClickListener;
+import com.xwray.groupie.ViewHolder;
 
 import java.security.Permission;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import br.com.poo.vinicius.scholist.model.Turma;
@@ -40,16 +56,35 @@ public class MaterialActivity extends AppCompatActivity {
     String adminUserId;
     FirebaseFirestore database;
     FirebaseStorage storage;
-
+    RecyclerView rv;
+    GroupAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_material);
         newMaterial = findViewById(R.id.novo_material_turma);
+        rv = findViewById(R.id.recycler);
         adminUserId = FirebaseAuth.getInstance().getUid();
         Intent intent = getIntent();
         turma = intent.getParcelableExtra("turma");
 
+
+        adapter = new GroupAdapter();
+        rv.setAdapter(adapter);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        fetchMaterial();
+
+
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull Item item, @NonNull View view) {
+                MaterialItem materialItem = (MaterialItem)item;
+                Intent intentSite = new Intent(Intent.ACTION_VIEW);
+                String site = materialItem.material.getMaterialUrl();
+                intentSite.setData(Uri.parse(site));
+                startActivity(intentSite);
+            }
+        });
 
 
         if(adminUserId.equals(turma.getUuidAdmin())) { } else {
@@ -71,7 +106,23 @@ public class MaterialActivity extends AppCompatActivity {
         });
     }
 
+    private void fetchMaterial() {
+        FirebaseFirestore.getInstance().collection("turmas").document(turma.getUuid())
+                .collection("material").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
+                if(e!= null) {
+                    Log.d("teste", e.getMessage()); return;}
 
+                    List<DocumentSnapshot> docs = queryDocumentSnapshots.getDocuments();
+                for (DocumentSnapshot doc: docs) {
+                    Material material = doc.toObject(Material.class);
+                    adapter.add(new MaterialItem(material));
+                }
+            }
+        });
+
+    }
 
 
     @Override
@@ -102,8 +153,8 @@ public class MaterialActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         String materialUrl = uri.toString();
-
-                        Material material =  new Material(materialUrl);
+                        String timestamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(System.currentTimeMillis()));
+                        Material material =  new Material(materialUrl, timestamp, "PDF");
 
                         CollectionReference doc = FirebaseFirestore.getInstance().collection("turmas");
                         doc.document(turma.getUuid()).collection("material").document().set(material).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -133,4 +184,24 @@ public class MaterialActivity extends AppCompatActivity {
             Toast.makeText(MaterialActivity.this, "Selecione o pdf", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
+
+    private class MaterialItem extends Item<ViewHolder> {
+        private final Material material;
+        private MaterialItem(Material material) {this.material = material;}
+
+        @Override
+        public void bind(@NonNull ViewHolder viewHolder, int position) {
+            TextView titulo = viewHolder.itemView.findViewById(R.id.material_titulo);
+            titulo.setText(material.getTitulo());
+        }
+
+        @Override
+        public int getLayout() {
+            return R.layout.item_material;
+        }
+    }
+
 }
