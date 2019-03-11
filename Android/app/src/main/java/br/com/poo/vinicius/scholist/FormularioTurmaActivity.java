@@ -75,6 +75,10 @@ public class FormularioTurmaActivity extends AppCompatActivity {
         }
         String filename = UUID.randomUUID().toString();
 
+        Intent backToList = new Intent(FormularioTurmaActivity.this, TurmasActivity.class);
+        startActivity(backToList);
+
+
         final StorageReference ref = FirebaseStorage.getInstance().getReference("/images/" + filename);
         ref.putFile(mSelectedUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -88,8 +92,7 @@ public class FormularioTurmaActivity extends AppCompatActivity {
                                 String adminUuid = FirebaseAuth.getInstance().getUid().toString();
 
 
-                                Turma turma = new Turma(nome, descricao, profileUrl, uid[0], adminUuid);
-
+                                final Turma turma = new Turma(nome, descricao, profileUrl, uid[0], adminUuid);
 
                                 CollectionReference doc = FirebaseFirestore.getInstance().collection("/turmas");
                                 doc.document()
@@ -97,8 +100,18 @@ public class FormularioTurmaActivity extends AppCompatActivity {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                Intent backToList = new Intent(FormularioTurmaActivity.this, TurmasActivity.class);
-                                                startActivity(backToList);
+
+                                                FirebaseFirestore.getInstance().collection("/users").document(FirebaseAuth.getInstance().getUid()).collection("turmas")
+                                                        .document().set(turma).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Toast.makeText(FormularioTurmaActivity.this, "Você entrou em " + turma.getNome(), Toast.LENGTH_LONG).show();
+                                                        finish();
+                                                    }
+                                                });
+
+
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
                                     @Override
