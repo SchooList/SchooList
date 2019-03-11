@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -34,7 +35,7 @@ public class MaterialActivity extends AppCompatActivity {
     Turma turma;
     Button newMaterial;
     Uri uriPdf;
-
+    String adminUserId;
     FirebaseFirestore database;
     FirebaseStorage storage;
 
@@ -43,9 +44,15 @@ public class MaterialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_material);
         newMaterial = findViewById(R.id.novo_material_turma);
-
+        adminUserId = FirebaseAuth.getInstance().getUid();
         Intent intent = getIntent();
         turma = intent.getParcelableExtra("turma");
+
+
+
+        if(adminUserId.equals(turma.getUuidAdmin())) { } else {
+            newMaterial.setAlpha(0);
+            newMaterial.setEnabled(false); }
 
         database = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
