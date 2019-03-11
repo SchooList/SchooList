@@ -92,6 +92,8 @@ public class RegisterActivity extends AppCompatActivity {
                 mBtnSelectedPhoto.setAlpha(0);
             } catch (IOException e) {
             }
+        } else {
+            Toast.makeText(RegisterActivity.this, "Selecione uma foto", Toast.LENGTH_SHORT).show();
         }
     }
 

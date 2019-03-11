@@ -117,6 +117,7 @@ public class MaterialActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == 86 && resultCode == RESULT_OK && data != null) {
             uriPdf = data.getData();
+            Toast.makeText(this, uriPdf.toString(), Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(MaterialActivity.this, "Selecione o pdf", Toast.LENGTH_SHORT).show();
         }
