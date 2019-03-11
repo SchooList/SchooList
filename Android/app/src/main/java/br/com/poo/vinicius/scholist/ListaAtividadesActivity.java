@@ -112,7 +112,7 @@ public class ListaAtividadesActivity extends AppCompatActivity {
                 new EnviaAlunosTask(this).execute();
                 break;
             case R.id.menu_baixar_provas:
-                Intent intentGoToProof = new Intent(ListaAtividadesActivity.this, ProvasActivity.class);
+                Intent intentGoToProof = new Intent(ListaAtividadesActivity.this, MaterialActivity.class);
                 intentGoToProof.putExtra("turma", turma);
                 startActivity(intentGoToProof);
                 break;
