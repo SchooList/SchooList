@@ -85,7 +85,7 @@ public class TurmasActivity extends AppCompatActivity {
             }
         });
 
-        fetchTurmas();
+
 
         btnNovaTurma.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,6 +153,7 @@ public class TurmasActivity extends AppCompatActivity {
             startActivity(backtoLogin);
         } else{
             verifyTypeUser();
+            fetchTurmas();
         }
 
     }
