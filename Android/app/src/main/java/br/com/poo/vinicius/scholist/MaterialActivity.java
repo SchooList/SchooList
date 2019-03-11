@@ -93,7 +93,7 @@ public class MaterialActivity extends AppCompatActivity {
 
     private void uploadFile() {
         String filename = UUID.randomUUID().toString();
-        final StorageReference ref = FirebaseStorage.getInstance().getReference("/images/" + filename);
+        final StorageReference ref = FirebaseStorage.getInstance().getReference("/pdf/" + filename);
 
         ref.putFile(uriPdf).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -105,8 +105,8 @@ public class MaterialActivity extends AppCompatActivity {
 
                         Material material =  new Material(materialUrl);
 
-                        CollectionReference doc = FirebaseFirestore.getInstance().collection(turma.getUuid());
-                        doc.document().set(material).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        CollectionReference doc = FirebaseFirestore.getInstance().collection("turmas");
+                        doc.document(turma.getUuid()).collection("material").document().set(material).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(MaterialActivity.this, "Deu certo ", Toast.LENGTH_LONG).show();
