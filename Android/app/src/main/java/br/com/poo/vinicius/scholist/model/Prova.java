@@ -9,11 +9,24 @@ public class Prova implements Serializable {
     private String materia;
     private String data;
     private List<String> topicos;
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Prova(String materia, String data, List<String> topicos) {
         this.materia = materia;
         this.data = data;
         this.topicos = topicos;
+    }
+
+    public Prova() {
+
     }
 
     public String getMateria() {

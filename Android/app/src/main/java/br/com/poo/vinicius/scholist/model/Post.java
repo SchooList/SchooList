@@ -10,8 +10,17 @@ public class Post implements Parcelable {
 
     String descricao;
     String timestamp;
+    Long id;
 
-    Post() {}
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Post() {}
 
     public String getDescricao() {
         return descricao;

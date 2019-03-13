@@ -12,7 +12,35 @@ public class User implements Parcelable {
     private String tipo;
     private String idTurmas[];
     Turma turmas;
+    long id;
 
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setProfileUrl(String profileUrl) {
+        this.profileUrl = profileUrl;
+    }
+
+    public Turma getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(Turma turmas) {
+        this.turmas = turmas;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public User() {
 

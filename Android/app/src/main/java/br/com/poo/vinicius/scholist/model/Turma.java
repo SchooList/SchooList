@@ -5,7 +5,7 @@ import android.os.Parcelable;
 import java.io.Serializable;
 
 public class Turma implements Parcelable {
-
+    User user;
     String nome;
     String descricao;
     String profileUrl;
@@ -13,6 +13,15 @@ public class Turma implements Parcelable {
     String uuidAdmin;
     Post post;
     User users[];
+    long id;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public User getUser() {
         return user;
@@ -21,10 +30,6 @@ public class Turma implements Parcelable {
     public void setUser(User user) {
         this.user = user;
     }
-
-    User user;
-
-
 
     public Turma() {}
 
@@ -43,7 +48,6 @@ public class Turma implements Parcelable {
         profileUrl = in.readString();
         uuidAdmin = in.readString();
     }
-
 
     public String getNome() {
         return nome;
@@ -88,8 +92,6 @@ public class Turma implements Parcelable {
     public void setUuidAdmin(String uuidAdmin) {
         this.uuidAdmin = uuidAdmin;
     }
-
-
 
     @Override
     public int describeContents() {
