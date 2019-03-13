@@ -154,7 +154,7 @@ public class MaterialActivity extends AppCompatActivity {
                     public void onSuccess(Uri uri) {
                         String materialUrl = uri.toString();
                         String timestamp = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(System.currentTimeMillis()));
-                        Material material =  new Material(materialUrl, timestamp, "PDF");
+                        Material material =  new Material(materialUrl, timestamp, "Enviado em "+ timestamp);
 
                         CollectionReference doc = FirebaseFirestore.getInstance().collection("turmas");
                         doc.document(turma.getUuid()).collection("material").document().set(material).addOnSuccessListener(new OnSuccessListener<Void>() {
