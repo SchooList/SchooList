@@ -1,4 +1,4 @@
-package br.com.poo.vinicius.scholist;
+package br.com.poo.vinicius.scholist.view;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,17 +11,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import br.com.poo.vinicius.scholist.R;
 import br.com.poo.vinicius.scholist.model.Turma;
-import br.com.poo.vinicius.scholist.model.User;
 
 public class EntrarNaTurmaActivity extends AppCompatActivity {
 

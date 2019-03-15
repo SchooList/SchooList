@@ -1,5 +1,6 @@
-package br.com.poo.vinicius.scholist;
+package br.com.poo.vinicius.scholist.view;
 
+import br.com.poo.vinicius.scholist.R;
 import br.com.poo.vinicius.scholist.model.Message;
 import br.com.poo.vinicius.scholist.model.Post;
 import br.com.poo.vinicius.scholist.model.Turma;

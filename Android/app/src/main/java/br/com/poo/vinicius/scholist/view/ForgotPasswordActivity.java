@@ -1,4 +1,4 @@
-package br.com.poo.vinicius.scholist;
+package br.com.poo.vinicius.scholist.view;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+
+import br.com.poo.vinicius.scholist.R;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 

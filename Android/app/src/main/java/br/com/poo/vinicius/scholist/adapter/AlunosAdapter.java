@@ -11,9 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
-import br.com.poo.vinicius.scholist.ListaAlunosActivity;
 import br.com.poo.vinicius.scholist.R;
 import br.com.poo.vinicius.scholist.model.Aluno;
 public class AlunosAdapter extends BaseAdapter {

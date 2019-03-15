@@ -1,4 +1,4 @@
-package br.com.poo.vinicius.scholist;
+package br.com.poo.vinicius.scholist.view;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +13,9 @@ import android.widget.ListView;
 import java.util.Arrays;
 import java.util.List;
 
+import br.com.poo.vinicius.scholist.DetalhesProvaFragment;
+import br.com.poo.vinicius.scholist.ListaProvasFragment;
+import br.com.poo.vinicius.scholist.R;
 import br.com.poo.vinicius.scholist.model.Prova;
 
 public class ProvasActivity extends AppCompatActivity {

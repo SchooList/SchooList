@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 
 import br.com.poo.vinicius.scholist.model.Aluno;
+import br.com.poo.vinicius.scholist.view.FormularioActivity;
 
 public class FormularioHelper {
 

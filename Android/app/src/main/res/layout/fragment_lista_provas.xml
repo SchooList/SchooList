@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:cardElevation="5dp"
-    tools:context=".ProvasActivity"
+    tools:context=".view.ProvasActivity"
     app:cardUseCompatPadding="true">
 
 

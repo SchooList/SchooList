@@ -1,6 +1,6 @@
 package br.com.poo.vinicius.scholist;
 
-class Material {
+public class Material {
     String materialUrl;
     String timestamp;
 

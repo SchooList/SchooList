@@ -1,29 +1,20 @@
-package br.com.poo.vinicius.scholist;
+package br.com.poo.vinicius.scholist.view;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -34,16 +25,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
 import com.xwray.groupie.Item;
-import com.xwray.groupie.OnItemLongClickListener;
 import com.xwray.groupie.ViewHolder;
 
 import java.util.List;
 
 import javax.annotation.Nullable;
 
-import br.com.poo.vinicius.scholist.adapter.AlunosAdapter;
-import br.com.poo.vinicius.scholist.dao.AlunoDAO;
-import br.com.poo.vinicius.scholist.model.Aluno;
+import br.com.poo.vinicius.scholist.EnviaAlunosTask;
+import br.com.poo.vinicius.scholist.R;
 import br.com.poo.vinicius.scholist.model.Post;
 import br.com.poo.vinicius.scholist.model.Turma;
 import br.com.poo.vinicius.scholist.model.User;

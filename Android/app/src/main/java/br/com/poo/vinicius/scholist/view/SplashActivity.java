@@ -1,11 +1,12 @@
-package br.com.poo.vinicius.scholist;
+package br.com.poo.vinicius.scholist.view;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.ViewGroup;
 import android.view.WindowManager;
+
+import br.com.poo.vinicius.scholist.R;
 
 public class SplashActivity extends AppCompatActivity {
 
