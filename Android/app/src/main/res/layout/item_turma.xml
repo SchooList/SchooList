@@ -31,6 +31,8 @@
         app:layout_constraintBottom_toBottomOf="@id/turma_imageView"
         app:layout_constraintVertical_bias="1.0"
         app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="12dp"
         android:textSize="14sp"
         android:layout_margin="8dp"
         android:padding="8dp"
