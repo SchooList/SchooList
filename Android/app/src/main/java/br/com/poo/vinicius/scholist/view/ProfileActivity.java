@@ -125,6 +125,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void logout() {
            FirebaseAuth.getInstance().signOut();
            Intent intentSignOut = new Intent(ProfileActivity.this, LoginActivity.class);
+           intentSignOut.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
            startActivity(intentSignOut);
            finish();
     }
